@@ -80,7 +80,8 @@ Please see [CONTRIBUTING](CONTRIBUTING.md) for details.
 
 ## Credits
 
-- [Fery Wardiyanto](https://github.com/feryardiant)
+- [Fery Wardiyanto](http://feryardiant.me)
+- [Slim Framework](http://www.slimframework.com/)
 
 ## License
 

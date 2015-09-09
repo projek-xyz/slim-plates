@@ -2,6 +2,7 @@
     "name": "slim/plates-view",
     "description": "Slim Framework 3 view helper built on top of the Plates templating component",
     "keywords": ["slim","framework","view","template","plates"],
+    "homepage": "https://feryardiant.me/slim-plates-view",
     "type": "library",
     "license": "MIT",
     "authors": [
@@ -9,6 +10,16 @@
             "name": "Fery Wardiyanto",
             "email": "hallo@feryardiant.me",
             "homepage": "http://feryardiant.me"
+        }
+    ],
+    "support": {
+        "issues": "https://github.com/feryardiant/slim-plates-view/issues",
+        "source": "https://github.com/feryardiant/slim-plates-view"
+    },
+    "repositories": [
+        {
+            "type": "vcs",
+            "url": "https://github.com/feryardiant/slim-plates-view"
         }
     ],
     "autoload": {
