@@ -1,0 +1,28 @@
+{
+    "name": "slim/plates-view",
+    "description": "Slim Framework 3 view helper built on top of the Plates templating component",
+    "keywords": ["slim","framework","view","template","plates"],
+    "type": "library",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Fery Wardiyanto",
+            "email": "hallo@feryardiant.me",
+            "homepage": "http://feryardiant.me"
+        }
+    ],
+    "autoload": {
+        "psr-4": {
+            "Slim\\Views\\": "src/"
+        }
+    },
+    "require": {
+        "php": ">=5.5.0",
+        "league/plates": "~3.1.0",
+        "pimple/pimple": "^3.0",
+        "psr/http-message": "^1.0"
+    },
+    "require-dev": {
+        "phpunit/phpunit": "~4.0"
+    }
+}
