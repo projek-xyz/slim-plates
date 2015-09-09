@@ -2,7 +2,7 @@
 <html lang="en-us">
   <head>
     <meta charset="UTF-8">
-    <title>Slim Framework 3.x Plates View by feryardiant</title>
+    <title>Slim Framework Plates View by feryardiant</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" type="text/css" href="stylesheets/normalize.css" media="screen">
     <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,700' rel='stylesheet' type='text/css'>
@@ -11,26 +11,24 @@
   </head>
   <body>
     <section class="page-header">
-      <h1 class="project-name">Slim Framework 3.x Plates View</h1>
-      <h2 class="project-tagline">Slim Framework 3 view helper built on top of the Plates templating component</h2>
+      <h1 class="project-name">Slim Framework Plates View</h1>
+      <h2 class="project-tagline">Slim Framework 3.x component helper built on top of the Plates templating system</h2>
       <a href="https://github.com/feryardiant/slim-plates-view" class="btn">View on GitHub</a>
       <a href="https://github.com/feryardiant/slim-plates-view/zipball/master" class="btn">Download .zip</a>
       <a href="https://github.com/feryardiant/slim-plates-view/tarball/master" class="btn">Download .tar.gz</a>
     </section>
 
     <section class="main-content">
-      <p><a href="https://travis-ci.org/feryardiant/slim-plates-view"><img src="https://travis-ci.org/feryardiant/slim-plates-view.svg?branch=master" alt="Build Status"></a></p>
+      <p><a href="https://travis-ci.org/feryardiant/slim-plates-view"><img src="https://img.shields.io/travis/feryardiant/slim-plates-view/master.svg?style=flat-square" alt="Build Status"></a></p>
 
-<p>This is a Slim Framework view helper built on top of the Plates templating component. You can use this component to create and render templates in your Slim Framework application.</p>
+<p>This is a Slim Framework 3.x component helper built on top of the Plates templating system. You can use this component to create and render templates in your Slim Framework application.</p>
 
 <h2>
 <a id="install" class="anchor" href="#install" aria-hidden="true"><span class="octicon octicon-link"></span></a>Install</h2>
 
-<p><strong>Not available yet! waiting moderation</strong></p>
-
 <p>Via <a href="https://getcomposer.org/">Composer</a></p>
 
-<div class="highlight highlight-bash"><pre>$ composer require slim/plates-view</pre></div>
+<div class="highlight highlight-bash"><pre>$ composer require projekslim/views-plates</pre></div>
 
 <p>Requires Slim Framework 3 and PHP 5.5.0 or newer.</p>
 
@@ -45,18 +43,18 @@
 <span class="pl-s1"></span>
 <span class="pl-s1"><span class="pl-c">// Register Plates View helper:</span></span>
 <span class="pl-s1"><span class="pl-c">// Option 1, using PlatesProvider</span></span>
-<span class="pl-s1"><span class="pl-smi">$container</span><span class="pl-k">-&gt;</span>register(<span class="pl-k">new</span> <span class="pl-c1">\Slim\Views\</span><span class="pl-c1">PlatesProvider</span>);</span>
+<span class="pl-s1"><span class="pl-smi">$container</span><span class="pl-k">-&gt;</span>register(<span class="pl-k">new</span> <span class="pl-c1">\ProjekSlim\Views\</span><span class="pl-c1">PlatesProvider</span>);</span>
 <span class="pl-s1"></span>
 <span class="pl-s1"><span class="pl-c">// Option 2, using Closure</span></span>
 <span class="pl-s1"><span class="pl-smi">$container</span>[<span class="pl-s"><span class="pl-pds">'</span>view<span class="pl-pds">'</span></span>] <span class="pl-k">=</span> <span class="pl-k">function</span> (<span class="pl-smi">$c</span>) {</span>
-<span class="pl-s1">    <span class="pl-smi">$view</span> <span class="pl-k">=</span> <span class="pl-k">new</span> <span class="pl-c1">\Slim\Views\</span><span class="pl-c1">Plates</span>([</span>
+<span class="pl-s1">    <span class="pl-smi">$view</span> <span class="pl-k">=</span> <span class="pl-k">new</span> <span class="pl-c1">\ProjekSlim\Views\</span><span class="pl-c1">Plates</span>([</span>
 <span class="pl-s1">        <span class="pl-s"><span class="pl-pds">'</span>directory<span class="pl-pds">'</span></span> <span class="pl-k">=&gt;</span> <span class="pl-s"><span class="pl-pds">'</span>path/to/views<span class="pl-pds">'</span></span>,</span>
 <span class="pl-s1">        <span class="pl-s"><span class="pl-pds">'</span>assetPath<span class="pl-pds">'</span></span> <span class="pl-k">=&gt;</span> <span class="pl-s"><span class="pl-pds">'</span>path/to/static/assets<span class="pl-pds">'</span></span>,</span>
 <span class="pl-s1">        <span class="pl-s"><span class="pl-pds">'</span>fileExtension<span class="pl-pds">'</span></span> <span class="pl-k">=&gt;</span> <span class="pl-s"><span class="pl-pds">'</span>tpl<span class="pl-pds">'</span></span>,</span>
 <span class="pl-s1">    ]);</span>
 <span class="pl-s1"></span>
 <span class="pl-s1">    <span class="pl-c">// Instantiate and add Slim specific extension</span></span>
-<span class="pl-s1">    <span class="pl-smi">$view</span><span class="pl-k">-&gt;</span>loadExtension(<span class="pl-k">new</span> <span class="pl-c1">Slim\Views\</span><span class="pl-c1">PlatesExtension</span>(</span>
+<span class="pl-s1">    <span class="pl-smi">$view</span><span class="pl-k">-&gt;</span>loadExtension(<span class="pl-k">new</span> <span class="pl-c1">ProjekSlim\Views\</span><span class="pl-c1">PlatesExtension</span>(</span>
 <span class="pl-s1">        <span class="pl-smi">$c</span>[<span class="pl-s"><span class="pl-pds">'</span>router<span class="pl-pds">'</span></span>],</span>
 <span class="pl-s1">        <span class="pl-smi">$c</span>[<span class="pl-s"><span class="pl-pds">'</span>request<span class="pl-pds">'</span></span>]<span class="pl-k">-&gt;</span>getUri()</span>
 <span class="pl-s1">    ));</span>
@@ -109,7 +107,7 @@
 <p>The MIT License (MIT). Please see <a href="https://github.com/feryardiant/slim-plates-view/blob/master/LICENSE.md">License File</a> for more information.</p>
 
       <footer class="site-footer">
-        <span class="site-footer-owner"><a href="https://github.com/feryardiant/slim-plates-view">Slim Framework 3.x Plates View</a> is maintained by <a href="https://github.com/feryardiant">feryardiant</a>.</span>
+        <span class="site-footer-owner"><a href="https://github.com/feryardiant/slim-plates-view">Slim Framework Plates View</a> is maintained by <a href="https://github.com/feryardiant">feryardiant</a>.</span>
 
         <span class="site-footer-credits">This page was generated by <a href="https://pages.github.com">GitHub Pages</a> using the <a href="https://github.com/jasonlong/cayman-theme">Cayman theme</a> by <a href="https://twitter.com/jasonlong">Jason Long</a>.</span>
       </footer>
