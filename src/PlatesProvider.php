@@ -1,5 +1,5 @@
 <?php
-namespace Slim\Views;
+namespace ProjekSlim\Views;
 
 use League\Plates\Extension\Asset;
 use League\Plates\Extension\URI;

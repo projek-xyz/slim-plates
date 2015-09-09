@@ -1,18 +1,12 @@
 <?php
-/**
- * Slim Framework (http://slimframework.com)
- *
- * @link      https://github.com/codeguy/Slim
- * @copyright Copyright (c) 2011-2015 Josh Lockhart
- * @license   https://github.com/codeguy/Slim/blob/master/LICENSE (MIT License)
- */
-namespace Slim\Tests\Views;
+namespace ProjekSlim\Views\Tests;
 
-use Slim\Views\Plates;
+use ProjekSlim\Views\Plates;
+use PHPUnit_Framework_TestCase;
 
 require dirname(__DIR__) . '/vendor/autoload.php';
 
-class PlatesTest extends \PHPUnit_Framework_TestCase
+class PlatesTest extends PHPUnit_Framework_TestCase
 {
     /**
      * @var Slim\Views\Plates

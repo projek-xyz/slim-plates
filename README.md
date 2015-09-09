@@ -1,17 +1,15 @@
-# Slim Framework Plates View (Unofficial)
+# [Unofficial] Slim Framework 3.x Plates View
 
-[![Build Status](https://travis-ci.org/feryardiant/slim-plates-view.svg?branch=master)](https://travis-ci.org/feryardiant/slim-plates-view)
+[![Build Status](https://img.shields.io/travis/feryardiant/slim-plates-view/master.svg?style=flat-square)](https://travis-ci.org/feryardiant/slim-plates-view)
 
-This is a Slim Framework view helper built on top of the Plates templating component. You can use this component to create and render templates in your Slim Framework application.
+This is a Slim Framework 3.x component helper built on top of the Plates templating system. You can use this component to create and render templates in your Slim Framework application.
 
 ## Install
-
-**Not available yet! waiting moderation**
 
 Via [Composer](https://getcomposer.org/)
 
 ```bash
-$ composer require slim/plates-view
+$ composer require projekslim/views-plates
 ```
 
 Requires Slim Framework 3 and PHP 5.5.0 or newer.
@@ -27,18 +25,18 @@ $container = $app->getContainer();
 
 // Register Plates View helper:
 // Option 1, using PlatesProvider
-$container->register(new \Slim\Views\PlatesProvider);
+$container->register(new \ProjekSlim\Views\PlatesProvider);
 
 // Option 2, using Closure
 $container['view'] = function ($c) {
-    $view = new \Slim\Views\Plates([
+    $view = new \ProjekSlim\Views\Plates([
         'directory' => 'path/to/views',
         'assetPath' => 'path/to/static/assets',
         'fileExtension' => 'tpl',
     ]);
 
     // Instantiate and add Slim specific extension
-    $view->loadExtension(new Slim\Views\PlatesExtension(
+    $view->loadExtension(new ProjekSlim\Views\PlatesExtension(
         $c['router'],
         $c['request']->getUri()
     ));
