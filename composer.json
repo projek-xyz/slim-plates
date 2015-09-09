@@ -2,6 +2,7 @@
     "name": "projekslim/views-plates",
     "description": "Slim Framework 3 view helper built on top of the Plates templating component",
     "keywords": ["slim","framework","view","template","plates"],
+    "homepage": "http://feryardiant.me/slim-plates-view",
     "type": "library",
     "license": "MIT",
     "authors": [

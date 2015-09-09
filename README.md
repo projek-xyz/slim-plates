@@ -1,6 +1,6 @@
 # [Unofficial] Slim Framework 3.x Plates View
 
-[![Build Status](https://img.shields.io/travis/feryardiant/slim-plates-view/master.svg?style=flat-square)](https://travis-ci.org/feryardiant/slim-plates-view)
+[![Build Status](https://img.shields.io/travis/feryardiant/slim-plates-view/master.svg?style=flat-square)](https://travis-ci.org/feryardiant/slim-plates-view) [![LICENSE](https://img.shields.io/packagist/l/projekslim/views-plates.svg?style=flat-square)](https://packagist.org/packages/projekslim/views-plates) [![VERSION](https://img.shields.io/packagist/v/projekslim/views-plates.svg?style=flat-square)](https://packagist.org/packages/projekslim/views-plates)
 
 This is a Slim Framework 3.x component helper built on top of the Plates templating system. You can use this component to create and render templates in your Slim Framework application.
 
