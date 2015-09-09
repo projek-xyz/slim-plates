@@ -1,6 +1,6 @@
 # Slim Framework Plates View
 
-[![Build Status](https://travis-ci.org/slimphp/Plates-View.svg?branch=master)](https://travis-ci.org/slimphp/Plates-View)
+[![Build Status](https://travis-ci.org/feryardiant/slim-plates-view.svg?branch=master)](https://travis-ci.org/feryardiant/slim-plates-view)
 
 This is a Slim Framework view helper built on top of the Plates templating component. You can use this component to create and render templates in your Slim Framework application.
 
