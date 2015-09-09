@@ -33,8 +33,6 @@ class Plates
         $engine = new Engine($settings['directory'], $settings['fileExtension']);
 
         $this->engine = $engine;
-
-        $container['view'] = $this;
     }
 
     /**
