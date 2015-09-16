@@ -1,6 +1,6 @@
 # [Unofficial] Slim Framework 3.x Plates View
 
-[![Build Status](https://img.shields.io/travis/feryardiant/slim-plates-view/master.svg?style=flat-square)](https://travis-ci.org/feryardiant/slim-plates-view) [![LICENSE](https://img.shields.io/packagist/l/projekslim/views-plates.svg?style=flat-square)](https://packagist.org/packages/projekslim/views-plates) [![VERSION](https://img.shields.io/packagist/v/projekslim/views-plates.svg?style=flat-square)](https://packagist.org/packages/projekslim/views-plates)
+[![Build Status](https://img.shields.io/travis/projek-xyz/slim-plates/master.svg?style=flat-square)](https://travis-ci.org/projek-xyz/slim-plates) [![LICENSE](https://img.shields.io/packagist/l/projek-xyz/slim-plates.svg?style=flat-square)](https://packagist.org/packages/projek-xyz/slim-plates) [![VERSION](https://img.shields.io/packagist/v/projek-xyz/slim-plates.svg?style=flat-square)](https://packagist.org/packages/projek-xyz/slim-plates)
 
 This is a Slim Framework 3.x component helper built on top of the Plates templating system. You can use this component to create and render templates in your Slim Framework application.
 
@@ -9,7 +9,7 @@ This is a Slim Framework 3.x component helper built on top of the Plates templat
 Via [Composer](https://getcomposer.org/)
 
 ```bash
-$ composer require projekslim/views-plates
+$ composer require projek-xyz/slim-plates
 ```
 
 Requires Slim Framework 3 and PHP 5.5.0 or newer.
