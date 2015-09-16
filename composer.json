@@ -24,7 +24,7 @@
     ],
     "autoload": {
         "psr-4": {
-            "ProjekSlim\\Views\\": "src/"
+            "Projek\\Slim\\": "src/"
         }
     },
     "require": {
