@@ -25,18 +25,18 @@ $container = $app->getContainer();
 
 // Register Plates View helper:
 // Option 1, using PlatesProvider
-$container->register(new \ProjekSlim\Views\PlatesProvider);
+$container->register(new \Projek\Slim\PlatesProvider);
 
 // Option 2, using Closure
 $container['view'] = function ($c) {
-    $view = new \ProjekSlim\Views\Plates([
+    $view = new \Projek\Slim\Plates([
         'directory' => 'path/to/views',
         'assetPath' => 'path/to/static/assets',
         'fileExtension' => 'tpl',
     ]);
 
     // Instantiate and add Slim specific extension
-    $view->loadExtension(new ProjekSlim\Views\PlatesExtension(
+    $view->loadExtension(new Projek\Slim\PlatesExtension(
         $c['router'],
         $c['request']->getUri()
     ));

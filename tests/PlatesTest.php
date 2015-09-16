@@ -1,7 +1,7 @@
 <?php
-namespace ProjekSlim\Views\Tests;
+namespace Projek\Slim\Tests;
 
-use ProjekSlim\Views\Plates;
+use Projek\Slim\Plates;
 use PHPUnit_Framework_TestCase;
 
 require dirname(__DIR__) . '/vendor/autoload.php';

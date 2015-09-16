@@ -1,8 +1,8 @@
 {
-    "name": "projekslim/views-plates",
+    "name": "projek-xyz/slim-plates",
     "description": "Slim Framework 3 view helper built on top of the Plates templating component",
     "keywords": ["slim","framework","view","template","plates"],
-    "homepage": "http://feryardiant.me/slim-plates-view",
+    "homepage": "http://www.projek.xyz/slim-plates",
     "type": "library",
     "license": "MIT",
     "authors": [
@@ -13,13 +13,13 @@
         }
     ],
     "support": {
-        "issues": "https://github.com/feryardiant/slim-plates-view/issues",
-        "source": "https://github.com/feryardiant/slim-plates-view"
+        "issues": "https://github.com/projek-xyz/slim-plates/issues",
+        "source": "https://github.com/projek-xyz/slim-plates"
     },
     "repositories": [
         {
             "type": "vcs",
-            "url": "https://github.com/feryardiant/slim-plates-view"
+            "url": "https://github.com/projek-xyz/slim-plates"
         }
     ],
     "autoload": {
