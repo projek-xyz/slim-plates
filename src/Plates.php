@@ -108,6 +108,7 @@ class Plates
     /**
      * Render the template
      *
+     * @param   Psr\Http\Message\ResponseInterface  $response  Http Response
      * @param   string  $name  Template name
      * @param   array   $data  Template data
      * @return  Psr\Http\Message\ResponseInterface
