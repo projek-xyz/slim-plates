@@ -9,7 +9,7 @@ This is a Slim Framework 3.x component helper built on top of the Plates templat
 Via [Composer](https://getcomposer.org/)
 
 ```bash
-$ composer require projek-xyz/slim-plates
+$ composer require projek-xyz/slim-plates --prefer-dist
 ```
 
 Requires Slim Framework 3 and PHP 5.5.0 or newer.
