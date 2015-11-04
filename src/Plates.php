@@ -18,27 +18,29 @@ class Plates
     ];
 
     /**
-     * @var  League\Plates\Engine
+     * @var League\Plates\Engine
      */
     private $engine;
 
     /**
      * Register this plates view provider with a Pimple container
      *
-     * @param  Container $container
+     * @param Container $container
      */
     public function __construct($settings)
     {
-        $settings = array_merge($this->settings, $settings);
-        $engine = new Engine($settings['directory'], $settings['fileExtension']);
+        $this->settings = array_merge($this->settings, $settings);
+        $this->engine = new Engine($this->settings['directory'], $this->settings['fileExtension']);
 
-        $this->engine = $engine;
+        if (null !== $this->settings['assetPath']) {
+            $this->setAssetPath($this->settings['assetPath']);
+        }
     }
 
     /**
      * Get the Plate Engine
      *
-     * @return  League\Plates\Engine
+     * @return League\Plates\Engine
      */
     public function getEngine()
     {
@@ -48,7 +50,7 @@ class Plates
     /**
      * Set Asset path from Plates Asset Extension
      *
-     * @param  string  $assetPath  Asset path
+     * @param string $assetPath
      */
     public function setAssetPath($assetPath)
     {
@@ -58,23 +60,23 @@ class Plates
     /**
      * Set Asset path from Plates Asset Extension
      *
-     * @param   Psr\Http\Message\ResponseInterface  $extension
-     * @return  League\Plates\Engine
+     * @param  Psr\Http\Message\ResponseInterface $extension
+     * @return League\Plates\Engine
      */
     public function loadExtension(ExtensionInterface $extension)
     {
         $extension->register($this->engine);
 
-        return $this;
+        return $this->engine;
     }
 
     /**
      * Add a new template folder for grouping templates under different namespaces.
      *
-     * @param   string   $name
-     * @param   string   $directory
-     * @param   boolean  $fallback
-     * @return  League\Plates\Engine
+     * @param  string  $name
+     * @param  string  $directory
+     * @param  boolean $fallback
+     * @return League\Plates\Engine
      */
     public function addFolder($name, $directory, $fallback = false)
     {
@@ -84,9 +86,9 @@ class Plates
     /**
      * Add preassigned template data.
      *
-     * @param   array              $data;
-     * @param   null|string|array  $templates;
-     * @return  League\Plates\Engine
+     * @param  array             $data
+     * @param  null|string|array $templates
+     * @return League\Plates\Engine
      */
     public function addData(array $data, $templates = null)
     {
@@ -96,9 +98,9 @@ class Plates
     /**
      * Register a new template function.
      *
-     * @param   string    $name;
-     * @param   callback  $callback;
-     * @return  League\Plates\Engine
+     * @param  string   $name
+     * @param  callback $callback
+     * @return League\Plates\Engine
      */
     public function registerFunction($name, $callback)
     {
@@ -108,10 +110,10 @@ class Plates
     /**
      * Render the template
      *
-     * @param   Psr\Http\Message\ResponseInterface  $response  Http Response
-     * @param   string  $name  Template name
-     * @param   array   $data  Template data
-     * @return  Psr\Http\Message\ResponseInterface
+     * @param  Psr\Http\Message\ResponseInterface $response
+     * @param  string                             $name
+     * @param  array                              $data
+     * @return Psr\Http\Message\ResponseInterface
      */
     public function render(ResponseInterface $response, $name, array $data = [])
     {

@@ -30,16 +30,15 @@ $container->register(new \Projek\Slim\PlatesProvider);
 // Option 2, using Closure
 $container['view'] = function ($c) {
     $view = new \Projek\Slim\Plates([
-        'directory' => 'path/to/views',
-        'assetPath' => 'path/to/static/assets',
+        'directory'     => 'path/to/views',
+        'assetPath'     => 'path/to/static/assets',
         'fileExtension' => 'tpl',
     ]);
 
     // Instantiate and add Slim specific extension
-    $view->loadExtension(new Projek\Slim\PlatesExtension(
-        $c['router'],
-        $c['request']->getUri()
-    ));
+    $view->loadExtension(
+        new Projek\Slim\PlatesExtension($c['router'], $c['request']->getUri())
+    );
 
     return $view;
 };
@@ -54,6 +53,8 @@ $app->get('/hello/{name}', function ($request, $response, $args) {
 // Run app
 $app->run();
 ```
+
+**NOTE**: if you are using _option 1_ please make sure you already have `$container['settings']['plates']` in your configuration file.
 
 ## Custom template functions
 

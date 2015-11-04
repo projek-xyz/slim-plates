@@ -21,6 +21,24 @@ class PlatesTest extends PHPUnit_Framework_TestCase
         ]);
     }
 
+    public function testShoudReturnsPlatesEngine()
+    {
+        $this->assertInstanceOf('League\Plates\Engine', $this->view->getEngine());
+        $this->assertInstanceOf('League\Plates\Engine', $this->view->addFolder('foo', __DIR__.'/templates'));
+        $this->assertInstanceOf('League\Plates\Engine', $this->view->addData(['foo' => 'bar']));
+        $this->assertInstanceOf(
+            'League\Plates\Engine',
+            $this->view->registerFunction('foobar', function () {
+                return true;
+            })
+        );
+    }
+
+    // public function testGetEngine()
+    // {
+    //     //
+    // }
+
     public function testRender()
     {
         $mockBody = $this->getMockBuilder('Psr\Http\Message\StreamInterface')

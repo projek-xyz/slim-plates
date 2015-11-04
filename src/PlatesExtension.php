@@ -32,6 +32,7 @@ class PlatesExtension implements ExtensionInterface
 
     /**
      * Register extension function.
+     *
      * @return null
      */
     public function register(Engine $engine)
@@ -52,10 +53,9 @@ class PlatesExtension implements ExtensionInterface
      * @param  string $name        Router name
      * @param  array  $data        Optional data you wanna add to
      * @param  array  $queryParams Optional query parameter
-     * @param  string $appName     Optional application name
      * @return string
      */
-    public function pathFor($name, $data = [], $queryParams = [], $appName = 'default')
+    public function pathFor($name, $data = [], $queryParams = [])
     {
         return $this->router->pathFor($name, $data, $queryParams);
     }
@@ -68,8 +68,7 @@ class PlatesExtension implements ExtensionInterface
      */
     public function baseUrl($permalink = '')
     {
-        $uri = $this->uri->getBaseUrl();
-        return rtrim($url, '/').'/'.$permalink;
+        return $this->uri->getBaseUrl().'/'.ltrim($permalink, '/');
     }
 
     /**
