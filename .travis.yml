@@ -1,11 +1,18 @@
 language: php
 
 php:
-  - 5.5
-  - 5.6
-  - 7.0
-  - hhvm
+    - 5.5
+    - 5.6
+    - 7.0
+    - hhvm
 
-install: composer install
+install:
+    - if [[ "$TRAVIS_PHP_VERSION" == '5.6' ]]; then composer require satooshi/php-coveralls:dev-master -n ; fi
+    - composer install -n
 
-script: phpunit --coverage-text --configuration phpunit.xml.dist
+script:
+    - if [[ "$TRAVIS_PHP_VERSION" == '5.6' ]]; then phpunit --coverage-clover clover.xml ; fi
+    - phpunit --coverage-clover clover.xml
+
+after_script:
+    - if [[ "$TRAVIS_PHP_VERSION" == '5.6' ]]; then php vendor/bin/coveralls -v ; fi
