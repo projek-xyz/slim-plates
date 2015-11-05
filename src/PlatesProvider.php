@@ -14,11 +14,11 @@ class PlatesProvider implements ServiceProviderInterface
      */
     public function register(Container $container)
     {
-        if (!$container['settings']->has('plates')) {
+        if (!$container['settings']->has('view')) {
             throw new InvalidArgumentException('Template configuration not found');
         }
 
-        $engine = new Plates($container['settings']->get('plates'));
+        $engine = new Plates($container['settings']->get('view'));
 
         $engine->loadExtension(
             new PlatesExtension($container['router'], $container['request']->getUri())
