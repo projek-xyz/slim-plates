@@ -29,11 +29,15 @@ $container->register(new \Projek\Slim\PlatesProvider);
 
 // Option 2, using Closure
 $container['view'] = function ($c) {
-    $view = new \Projek\Slim\Plates([
+    $settings = [
+        // Path to view directory
         'directory'     => 'path/to/views',
+        // Path to asset directory
         'assetPath'     => 'path/to/static/assets',
+        // Template extension (default: 'php')
         'fileExtension' => 'tpl',
-    ]);
+    ];
+    $view = new \Projek\Slim\Plates($settings);
 
     // Instantiate and add Slim specific extension
     $view->loadExtension(
@@ -54,13 +58,13 @@ $app->get('/hello/{name}', function ($request, $response, $args) {
 $app->run();
 ```
 
-**NOTE**: if you are using _option 1_ please make sure you already have `$container['settings']['plates']` in your configuration file.
+**NOTE**: if you are using _option 1_ please make sure you already have `$container['settings']['view']` in your configuration file.
 
 ## Custom template functions
 
 This component exposes a custom `$this->pathFor()` function to your Plates templates. You can use this function to generate complete URLs to any Slim application named route. This is an example Plates template:
 
-```html
+```php
 <?php $this->layout('base-template') ?>
 
 <?php $this->start('body') ?>
@@ -82,7 +86,8 @@ Please see [CONTRIBUTING](CONTRIBUTING.md) for details.
 ## Credits
 
 - [Fery Wardiyanto](http://feryardiant.me)
-- [Slim Framework](http://www.slimframework.com/)
+- [Slim Framework](http://www.slimframework.com)
+- [Plates Template](http://platesphp.com)
 
 ## License
 
