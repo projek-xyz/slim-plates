@@ -5,7 +5,6 @@ use League\Plates\Engine;
 use League\Plates\Extension\Asset;
 use League\Plates\Extension\ExtensionInterface;
 use Psr\Http\Message\ResponseInterface;
-use InvalidArgumentException;
 
 class Plates
 {
