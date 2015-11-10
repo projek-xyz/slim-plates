@@ -23,7 +23,7 @@ class PlatesTest extends PHPUnit_Framework_TestCase
 
     public function testShoudReturnsPlatesEngine()
     {
-        $this->assertInstanceOf('League\Plates\Engine', $this->view->getEngine());
+        $this->assertInstanceOf('League\Plates\Engine', $this->view->getPlates());
         $this->assertInstanceOf('League\Plates\Engine', $this->view->addFolder('foo', __DIR__.'/templates'));
         $this->assertInstanceOf('League\Plates\Engine', $this->view->addData(['foo' => 'bar']));
         $this->assertInstanceOf(
