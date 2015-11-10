@@ -76,7 +76,8 @@ class PlatesExtension implements ExtensionInterface
      *
      * @return string
      */
-    public function basePath() {
+    public function basePath()
+    {
         return $this->uri->getBasePath();
     }
 
@@ -85,7 +86,8 @@ class PlatesExtension implements ExtensionInterface
      *
      * @return string
      */
-    public function path() {
+    public function path()
+    {
         return $this->uri->getPath();
     }
 
@@ -94,7 +96,8 @@ class PlatesExtension implements ExtensionInterface
      *
      * @return string
      */
-    public function scheme() {
+    public function scheme()
+    {
         return $this->uri->getScheme();
     }
 
@@ -103,7 +106,8 @@ class PlatesExtension implements ExtensionInterface
      *
      * @return string
      */
-    public function host() {
+    public function host()
+    {
         return $this->uri->getHost();
     }
 
@@ -112,7 +116,8 @@ class PlatesExtension implements ExtensionInterface
      *
      * @return string
      */
-    public function port() {
+    public function port()
+    {
         return $this->uri->getPort();
     }
 
@@ -121,7 +126,8 @@ class PlatesExtension implements ExtensionInterface
      *
      * @return string
      */
-    public function query() {
+    public function query()
+    {
         return $this->uri->getQuery();
     }
 }

@@ -20,7 +20,7 @@ class Plates
     /**
      * @var League\Plates\Engine
      */
-    private $engine;
+    private $plates;
 
     /**
      * Register this plates view provider with a Pimple container
@@ -30,7 +30,7 @@ class Plates
     public function __construct($settings)
     {
         $this->settings = array_merge($this->settings, $settings);
-        $this->engine = new Engine($this->settings['directory'], $this->settings['fileExtension']);
+        $this->plates = new Engine($this->settings['directory'], $this->settings['fileExtension']);
 
         if (null !== $this->settings['assetPath']) {
             $this->setAssetPath($this->settings['assetPath']);
@@ -42,9 +42,9 @@ class Plates
      *
      * @return League\Plates\Engine
      */
-    public function getEngine()
+    public function getPlates()
     {
-        return $this->engine;
+        return $this->plates;
     }
 
     /**
@@ -54,7 +54,7 @@ class Plates
      */
     public function setAssetPath($assetPath)
     {
-        return $this->engine->loadExtension(new Asset($assetPath));
+        return $this->plates->loadExtension(new Asset($assetPath));
     }
 
     /**
@@ -65,9 +65,9 @@ class Plates
      */
     public function loadExtension(ExtensionInterface $extension)
     {
-        $extension->register($this->engine);
+        $extension->register($this->plates);
 
-        return $this->engine;
+        return $this->plates;
     }
 
     /**
@@ -80,7 +80,7 @@ class Plates
      */
     public function addFolder($name, $directory, $fallback = false)
     {
-        return $this->engine->addFolder($name, $directory, $fallback);
+        return $this->plates->addFolder($name, $directory, $fallback);
     }
 
     /**
@@ -92,7 +92,7 @@ class Plates
      */
     public function addData(array $data, $templates = null)
     {
-        return $this->engine->addData($data, $templates);
+        return $this->plates->addData($data, $templates);
     }
 
     /**
@@ -104,7 +104,7 @@ class Plates
      */
     public function registerFunction($name, $callback)
     {
-        return $this->engine->registerFunction($name, $callback);
+        return $this->plates->registerFunction($name, $callback);
     }
 
     /**
@@ -117,6 +117,6 @@ class Plates
      */
     public function render(ResponseInterface $response, $name, array $data = [])
     {
-        return $response->getBody()->write($this->engine->render($name, $data));
+        return $response->getBody()->write($this->plates->render($name, $data));
     }
 }
