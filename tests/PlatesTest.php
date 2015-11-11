@@ -4,8 +4,6 @@ namespace Projek\Slim\Tests;
 use Projek\Slim\Plates;
 use PHPUnit_Framework_TestCase;
 
-require dirname(__DIR__) . '/vendor/autoload.php';
-
 class PlatesTest extends PHPUnit_Framework_TestCase
 {
     /**
