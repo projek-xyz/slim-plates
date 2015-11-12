@@ -21,7 +21,10 @@ class PlatesProvider implements ServiceProviderInterface
         $engine = new Plates($container->get('settings')['view']);
 
         $engine->loadExtension(
-            new PlatesExtension($container['router'], $container['request']->getUri())
+            new PlatesExtension(
+                $container->get('router'),
+                $container->get('request')->getUri()
+            )
         );
 
         $container['view'] = $engine;

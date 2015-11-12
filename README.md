@@ -64,9 +64,13 @@ $app->run();
 
 **NOTE**: if you are using _option 1_ please make sure you already have `$container['settings']['view']` in your configuration file.
 
-## Custom template functions
+## Custom functions
 
-This component exposes a custom `$this->pathFor()` function to your Plates templates. You can use this function to generate complete URLs to any Slim application named route. This is an example Plates template:
+This component exposes some Slim functions to your Plates templates.
+
+### `pathFor()`
+
+You can use this function to generate complete URLs to any Slim application named route. Example:
 
 ```php
 <?php $this->layout('base-template') ?>
@@ -76,6 +80,42 @@ This component exposes a custom `$this->pathFor()` function to your Plates templ
 <small><?=$this->pathFor('profile', ['name'=> $name])?></small>
 <?php $this->stop() ?>
 ```
+
+### `baseUrl()`
+
+Retrieve the base url of your Slim application. Example:
+
+```php
+<a href="<?=$this->baseUrl()?>">Some Link</a>
+```
+
+### `basePath()`
+
+Retrieve the base url of your Slim application. Example:
+
+```php
+<link rel="stylesheet" href="<?=$this->basePath().'asset/css/main.css'?>">
+```
+
+### `uriScheme()`
+
+Retrieve the [scheme](https://tools.ietf.org/html/rfc3986#section-3.1) component of the URI.
+
+### `uriHost()`
+
+Retrieve the [host](http://tools.ietf.org/html/rfc3986#section-3.2.2) component of the URI
+
+### `uriPort()`
+
+Retrieve the [port](https://tools.ietf.org/html/rfc3986#section-3.2.3) component of the URI.
+
+### `uriPath()`
+
+Retrieve the [path](https://tools.ietf.org/html/rfc3986#section-3.3) component of the URI.
+
+### `uriQuery()`
+
+Retrieve the [query string](https://tools.ietf.org/html/rfc3986#section-3.4) component of the URI.
 
 ## Testing
 
