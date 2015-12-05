@@ -122,7 +122,7 @@ Retrieve the [query string](https://tools.ietf.org/html/rfc3986#section-3.4) com
 ## Testing
 
 ```bash
-phpunit
+$ phpunit
 ```
 
 ## Contributing

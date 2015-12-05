@@ -37,14 +37,14 @@ class PlatesExtension implements ExtensionInterface
      */
     public function register(Engine $engine)
     {
-        $engine->registerFunction('pathFor',   [$this, 'pathFor']);
-        $engine->registerFunction('baseUrl',   [$this, 'baseUrl']);
-        $engine->registerFunction('basePath',  [$this, 'basePath']);
+        $engine->registerFunction('pathFor', [$this, 'pathFor']);
+        $engine->registerFunction('baseUrl', [$this, 'baseUrl']);
+        $engine->registerFunction('basePath', [$this, 'basePath']);
         $engine->registerFunction('uriScheme', [$this, 'scheme']);
-        $engine->registerFunction('uriPath',   [$this, 'path']);
-        $engine->registerFunction('uriHost',   [$this, 'host']);
-        $engine->registerFunction('uriPort',   [$this, 'port']);
-        $engine->registerFunction('uriQuery',  [$this, 'query']);
+        $engine->registerFunction('uriPath', [$this, 'path']);
+        $engine->registerFunction('uriHost', [$this, 'host']);
+        $engine->registerFunction('uriPort', [$this, 'port']);
+        $engine->registerFunction('uriQuery', [$this, 'query']);
     }
 
     /**
