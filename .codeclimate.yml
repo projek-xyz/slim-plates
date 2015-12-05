@@ -8,7 +8,7 @@ engines:
 
 ratings:
     paths:
-    - src/**.php
+        - src/**.php
 
 exclude_paths:
     - tests/**/*
