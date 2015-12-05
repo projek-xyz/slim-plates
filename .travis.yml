@@ -13,9 +13,9 @@ install:
     - if [[ "$TRAVIS_PHP_VERSION" != '5.6' ]]; then composer install -n ; fi
 
 script:
-    - if [[ "$TRAVIS_PHP_VERSION" == '5.6' ]]; then php vendor/bin/phpcs --standard=PSR2 -n -p src/ ; fi
     - if [[ "$TRAVIS_PHP_VERSION" == '5.6' ]]; then php vendor/bin/phpunit --coverage-clover clover.xml ; fi
     - if [[ "$TRAVIS_PHP_VERSION" != '5.6' ]]; then php vendor/bin/phpunit --coverage-text ; fi
+    - if [[ "$TRAVIS_PHP_VERSION" == '5.6' ]]; then php vendor/bin/phpcs --standard=PSR2 -n -p src/ ; fi
 
 after_script:
     - if [[ "$TRAVIS_PHP_VERSION" == '5.6' ]]; then php vendor/bin/coveralls -v ; fi
