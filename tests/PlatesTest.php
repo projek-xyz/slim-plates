@@ -2,40 +2,22 @@
 namespace Projek\Slim\Tests;
 
 use Projek\Slim\Plates;
-use PHPUnit_Framework_TestCase;
+use League\Plates\Engine;
 
-class PlatesTest extends PHPUnit_Framework_TestCase
+class PlatesTest extends TestCase
 {
-    /**
-     * @var Slim\Views\Plates
-     */
-    protected $view;
-
-    public function setUp()
-    {
-        $this->view = new Plates([
-            'directory' => __DIR__ . '/templates',
-            'fileExtension' => 'tpl'
-        ]);
-    }
-
     public function testShoudReturnsPlatesEngine()
     {
-        $this->assertInstanceOf('League\Plates\Engine', $this->view->getPlates());
-        $this->assertInstanceOf('League\Plates\Engine', $this->view->addFolder('foo', __DIR__.'/templates'));
-        $this->assertInstanceOf('League\Plates\Engine', $this->view->addData(['foo' => 'bar']));
+        $this->assertInstanceOf(Engine::class, $this->view->getPlates());
+        $this->assertInstanceOf(Engine::class, $this->view->addFolder('foo', __DIR__.'/templates'));
+        $this->assertInstanceOf(Engine::class, $this->view->addData(['foo' => 'bar']));
         $this->assertInstanceOf(
-            'League\Plates\Engine',
+            Engine::class,
             $this->view->registerFunction('foobar', function () {
                 return true;
             })
         );
     }
-
-    // public function testGetEngine()
-    // {
-    //     //
-    // }
 
     public function testRender()
     {
