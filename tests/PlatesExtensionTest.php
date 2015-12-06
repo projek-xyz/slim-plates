@@ -16,6 +16,7 @@ class PlatesExtensionTest extends TestCase
 
     public function setUp()
     {
+        // It's not a valid test, right? lol.
         $this->settings['directory'] = __DIR__.'/templates';
         $this->app = new App([
             'settings' => ['view' => $this->settings]
