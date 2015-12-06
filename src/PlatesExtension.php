@@ -9,12 +9,12 @@ use Slim\Interfaces\RouterInterface;
 class PlatesExtension implements ExtensionInterface
 {
     /**
-     * @var Slim\Interfaces\RouterInterface
+     * @var \Slim\Interfaces\RouterInterface
      */
     private $router;
 
     /**
-     * @var string|Slim\Http\Uri
+     * @var \Psr\Http\Message\UriInterface
      */
     private $uri;
 
@@ -31,9 +31,10 @@ class PlatesExtension implements ExtensionInterface
     }
 
     /**
-     * Register extension function.
+     * Register extension function
      *
-     * @return null
+     * @param  \League\Plates\Engine $engine Plates instance
+     * @return void
      */
     public function register(Engine $engine)
     {

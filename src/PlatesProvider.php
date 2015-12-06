@@ -10,7 +10,7 @@ class PlatesProvider implements ServiceProviderInterface
     /**
      * Register this plates view provider with a Pimple container
      *
-     * @param Container $container
+     * @param \Pimple\Container $container
      */
     public function register(Container $container)
     {
