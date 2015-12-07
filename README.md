@@ -84,12 +84,18 @@ You can use this function to generate complete URLs to any Slim application name
 <?php $this->stop() ?>
 ```
 
-### `baseUrl()`
+### `baseUrl($permalink = '')`
 
 Retrieve the base url of your Slim application. Example:
 
 ```php
 <a href="<?=$this->baseUrl()?>">Some Link</a>
+```
+
+Or you can pass a permalink
+
+```php
+<a href="<?=$this->baseUrl('some/path')?>">Some Other Link</a>
 ```
 
 ### `basePath()`
@@ -99,6 +105,10 @@ Retrieve the base url of your Slim application. Example:
 ```php
 <link rel="stylesheet" href="<?=$this->basePath().'asset/css/main.css'?>">
 ```
+
+### `uriFull()`
+
+Retrieve full request URI.
 
 ### `uriScheme()`
 
@@ -119,6 +129,10 @@ Retrieve the [path](https://tools.ietf.org/html/rfc3986#section-3.3) component o
 ### `uriQuery()`
 
 Retrieve the [query string](https://tools.ietf.org/html/rfc3986#section-3.4) component of the URI.
+
+### `uriFragment()`
+
+Retrieve the [fragment](https://tools.ietf.org/html/rfc3986#section-3.5) component of the URI.
 
 ## Testing
 

@@ -12,7 +12,7 @@ class PlatesExtensionTest extends TestCase
     public function setUp()
     {
         $this->router = new Router;
-        $this->uri = new Uri('http', 'example.com', 80, '/', 'ab=cd');
+        $this->uri = new Uri('http', 'example.com', 80, '/', 'ab=cd', 'top');
         $this->view = new Engine(
             __DIR__.'/templates',
             $this->settings['fileExtension']
@@ -54,6 +54,18 @@ class PlatesExtensionTest extends TestCase
         });
 
         $this->assertEquals('', $basePath());
+    }
+
+    public function testShouldHaveUriFunc()
+    {
+        $this->assertTrue($this->view->doesFunctionExist('uriFull'));
+
+        $uriFull = $this->view->getFunction('uriFull')->getCallback();
+        $this->router->map(['GET'], '/coba', function ($req, $res) {
+            return $res->write('test');
+        });
+
+        $this->assertEquals('http://example.com/?ab=cd#top', $uriFull());
     }
 
     public function testShouldHaveSchemeFunc()
@@ -114,5 +126,17 @@ class PlatesExtensionTest extends TestCase
         });
 
         $this->assertEquals('ab=cd', $uriQuery());
+    }
+
+    public function testShouldHaveFragmentFunc()
+    {
+        $this->assertTrue($this->view->doesFunctionExist('uriFragment'));
+
+        $uriFragment = $this->view->getFunction('uriFragment')->getCallback();
+        $this->router->map(['GET'], '/coba', function ($req, $res) {
+            return $res->write('test');
+        });
+
+        $this->assertEquals('top', $uriFragment());
     }
 }
