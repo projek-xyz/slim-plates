@@ -1,4 +1,4 @@
-# [Unofficial] Slim Framework 3.x Plates View
+# Slim Framework 3.x Plates View
 
 [![LICENSE](https://img.shields.io/packagist/l/projek-xyz/slim-plates.svg?style=flat-square)](LICENSE.md)
 [![VERSION](https://img.shields.io/packagist/v/projek-xyz/slim-plates.svg?style=flat-square)](https://github.com/projek-xyz/slim-plates/releases)
@@ -38,9 +38,9 @@ $container->register(new \Projek\Slim\PlatesProvider);
 $container['view'] = function ($c) {
     $settings = [
         // Path to view directory
-        'directory'     => 'path/to/views',
+        'directory' => 'path/to/views',
         // Path to asset directory
-        'assetPath'     => 'path/to/static/assets',
+        'assetPath' => 'path/to/static/assets',
         // Template extension (default: 'php')
         'fileExtension' => 'tpl',
     ];

@@ -9,13 +9,6 @@ use Projek\Slim\PlatesExtension;
 
 class PlatesExtensionTest extends TestCase
 {
-    /**
-     * Slim App Instance
-     *
-     * @var \Slim\App
-     */
-    private $app;
-
     public function setUp()
     {
         $this->router = new Router;
