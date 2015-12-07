@@ -38,27 +38,14 @@ class PlatesExtension implements ExtensionInterface
      */
     public function register(Engine $engine)
     {
-        $engine->registerFunction('pathFor', [$this, 'pathFor']);
         $engine->registerFunction('baseUrl', [$this, 'baseUrl']);
-        $engine->registerFunction('basePath', [$this, 'basePath']);
-        $engine->registerFunction('uriScheme', [$this, 'scheme']);
-        $engine->registerFunction('uriHost', [$this, 'host']);
-        $engine->registerFunction('uriPort', [$this, 'port']);
-        $engine->registerFunction('uriPath', [$this, 'path']);
-        $engine->registerFunction('uriQuery', [$this, 'query']);
-    }
-
-    /**
-     * Retrieve Slim Router::pathFor()
-     *
-     * @param  string $name        Router name
-     * @param  array  $data        Optional data you wanna add to
-     * @param  array  $queryParams Optional query parameter
-     * @return string
-     */
-    public function pathFor($name, $data = [], $queryParams = [])
-    {
-        return $this->router->pathFor($name, $data, $queryParams);
+        $engine->registerFunction('pathFor', [$this->router, 'pathFor']);
+        $engine->registerFunction('basePath', [$this->uri, 'getBasePath']);
+        $engine->registerFunction('uriScheme', [$this->uri, 'getScheme']);
+        $engine->registerFunction('uriHost', [$this->uri, 'getHost']);
+        $engine->registerFunction('uriPort', [$this->uri, 'getPort']);
+        $engine->registerFunction('uriPath', [$this->uri, 'getPath']);
+        $engine->registerFunction('uriQuery', [$this->uri, 'getQuery']);
     }
 
     /**
@@ -70,65 +57,5 @@ class PlatesExtension implements ExtensionInterface
     public function baseUrl($permalink = '')
     {
         return $this->uri->getBaseUrl().'/'.ltrim($permalink, '/');
-    }
-
-    /**
-     * Retrieve the base path segment of the URI.
-     *
-     * @return string
-     */
-    public function basePath()
-    {
-        return $this->uri->getBasePath();
-    }
-
-    /**
-     * Retrieve the path component of the URI.
-     *
-     * @return string
-     */
-    public function path()
-    {
-        return $this->uri->getPath();
-    }
-
-    /**
-     * Retrieve the scheme component of the URI.
-     *
-     * @return string
-     */
-    public function scheme()
-    {
-        return $this->uri->getScheme();
-    }
-
-    /**
-     * Retrieve the host component of the URI.
-     *
-     * @return string
-     */
-    public function host()
-    {
-        return $this->uri->getHost();
-    }
-
-    /**
-     * Retrieve the port component of the URI.
-     *
-     * @return string
-     */
-    public function port()
-    {
-        return $this->uri->getPort();
-    }
-
-    /**
-     * Retrieve the query string of the URI.
-     *
-     * @return string
-     */
-    public function query()
-    {
-        return $this->uri->getQuery();
     }
 }
