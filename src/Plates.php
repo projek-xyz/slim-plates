@@ -15,6 +15,7 @@ class Plates
         'directory' => null,
         'assetPath' => null,
         'fileExtension' => 'php',
+        'timestampInFilename' => false,
     ];
 
     /**
@@ -49,7 +50,7 @@ class Plates
      */
     public function setAssetPath($assetPath)
     {
-        return $this->plates->loadExtension(new Asset($assetPath));
+        return $this->plates->loadExtension(new Asset($assetPath, $this->settings['timestampInFilename']));
     }
 
     /**
