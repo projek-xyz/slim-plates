@@ -29,7 +29,7 @@ class Plates
         $this->plates = new Engine($this->settings['directory'], $this->settings['fileExtension']);
 
         if (null !== $this->settings['assetPath']) {
-            $this->setAssetPath($this->settings['assetPath'], $this->settings['timestampInFilename']);
+            $this->setAssetPath($this->settings['assetPath']);
         }
     }
 
@@ -50,7 +50,7 @@ class Plates
      */
     public function setAssetPath($assetPath)
     {
-        return $this->plates->loadExtension(new Asset($assetPath));
+        return $this->plates->loadExtension(new Asset($assetPath, $this->settings['timestampInFilename']));
     }
 
     /**
