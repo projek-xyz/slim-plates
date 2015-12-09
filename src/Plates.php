@@ -15,6 +15,7 @@ class Plates
         'directory' => null,
         'assetPath' => null,
         'fileExtension' => 'php',
+        'timestampInFilename' => false,
     ];
 
     /**
@@ -28,7 +29,7 @@ class Plates
         $this->plates = new Engine($this->settings['directory'], $this->settings['fileExtension']);
 
         if (null !== $this->settings['assetPath']) {
-            $this->setAssetPath($this->settings['assetPath']);
+            $this->setAssetPath($this->settings['assetPath'], $this->settings['timestampInFilename']);
         }
     }
 
