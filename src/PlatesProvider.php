@@ -18,7 +18,10 @@ class PlatesProvider implements ServiceProviderInterface
             throw new InvalidArgumentException('Template configuration not found');
         }
 
-        $engine = new Plates($container->get('settings')['view']);
+        $engine = new Plates(
+            $container->get('settings')['view'],
+            $container->get('response')
+        );
 
         $engine->loadExtension(
             new PlatesExtension(
