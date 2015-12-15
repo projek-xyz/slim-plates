@@ -3,6 +3,8 @@ namespace Projek\Slim\Tests;
 
 use Projek\Slim\Plates;
 use League\Plates\Engine;
+use Psr\Http\Message\ResponseInterface;
+use Slim\Http\Response;
 
 class PlatesTest extends TestCase
 {
@@ -21,27 +23,21 @@ class PlatesTest extends TestCase
 
     public function testRender()
     {
-        $mockBody = $this->getMockBuilder('Psr\Http\Message\StreamInterface')
+        $mockResponse = $this->getMockBuilder(Response::class)
             ->disableOriginalConstructor()
             ->getMock();
 
-        $mockResponse = $this->getMockBuilder('Psr\Http\Message\ResponseInterface')
-            ->disableOriginalConstructor()
-            ->getMock();
-
-        $mockBody->expects($this->once())
+        $mockResponse->expects($this->once())
             ->method('write')
             ->with("<p>Hi, my name is Fery.</p>\n")
             ->willReturn($mockResponse);
 
-        $mockResponse->expects($this->once())
-            ->method('getBody')
-            ->willReturn($mockBody);
+        $this->view->setResponse($mockResponse);
 
-        $response = $this->view->render($mockResponse, 'example', [
+        $response = $this->view->render('example', [
             'name' => 'Fery'
         ]);
 
-        $this->assertInstanceOf('Psr\Http\Message\ResponseInterface', $response);
+        $this->assertInstanceOf(ResponseInterface::class, $response);
     }
 }

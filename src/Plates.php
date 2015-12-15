@@ -23,10 +23,22 @@ class Plates
      */
     private $plates;
 
-    public function __construct($settings)
+    /**
+     * @var \Psr\Http\Message\ResponseInterface
+     */
+    private $response;
+
+    /**
+     * Create new Projek\Slim\Plates instance
+     *
+     * @param string[]                                 $settings
+     * @param \Psr\Http\Message\ResponseInterface|null $response
+     */
+    public function __construct(array $settings, ResponseInterface $response = null)
     {
         $this->settings = array_merge($this->settings, $settings);
         $this->plates = new Engine($this->settings['directory'], $this->settings['fileExtension']);
+        $this->response = $response;
 
         if (null !== $this->settings['assetPath']) {
             $this->setAssetPath($this->settings['assetPath']);
@@ -104,15 +116,27 @@ class Plates
     }
 
     /**
-     * Render the template
+     * Set response
      *
      * @param  \Psr\Http\Message\ResponseInterface $response
-     * @param  string                              $name
-     * @param  string[]                            $data
+     * @return self
+     */
+    public function setResponse(ResponseInterface $response)
+    {
+        $this->response = $response;
+
+        return $this;
+    }
+
+    /**
+     * Render the template
+     *
+     * @param  string   $name
+     * @param  string[] $data
      * @return \Psr\Http\Message\ResponseInterface
      */
-    public function render(ResponseInterface $response, $name, array $data = [])
+    public function render($name, array $data = [])
     {
-        return $response->getBody()->write($this->plates->render($name, $data));
+        return $this->response->write($this->plates->render($name, $data));
     }
 }
