@@ -32,7 +32,7 @@ class Plates
      * Create new Projek\Slim\Plates instance
      *
      * @param string[]                                 $settings
-     * @param \Psr\Http\Message\ResponseInterface|null $response
+     * @param null|\Psr\Http\Message\ResponseInterface $response
      */
     public function __construct(array $settings, ResponseInterface $response = null)
     {
@@ -58,17 +58,20 @@ class Plates
     /**
      * Set Asset path from Plates Asset Extension
      *
-     * @param string $assetPath
+     * @param  string $assetPath
+     * @return \League\Plates\Engine
      */
     public function setAssetPath($assetPath)
     {
-        return $this->plates->loadExtension(new Asset($assetPath, $this->settings['timestampInFilename']));
+        return $this->plates->loadExtension(
+            new Asset($assetPath, $this->settings['timestampInFilename'])
+        );
     }
 
     /**
      * Set Asset path from Plates Asset Extension
      *
-     * @param  \Psr\Http\Message\ResponseInterface $extension
+     * @param  \League\Plates\Extension\ExtensionInterface $extension
      * @return \League\Plates\Engine
      */
     public function loadExtension(ExtensionInterface $extension)

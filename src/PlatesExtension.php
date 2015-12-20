@@ -21,8 +21,8 @@ class PlatesExtension implements ExtensionInterface
     /**
      * Create new Asset instance.
      *
-     * @param string  $path
-     * @param boolean $filenameMethod
+     * @param \Slim\Interfaces\RouterInterface $router
+     * @param \Psr\Http\Message\UriInterface   $uri
      */
     public function __construct(RouterInterface $router, UriInterface $uri)
     {
