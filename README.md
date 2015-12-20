@@ -48,6 +48,10 @@ $container['view'] = function ($c) {
     ];
     $view = new \Projek\Slim\Plates($settings);
 
+    // Set \Psr\Http\Message\ResponseInterface object
+    // Or you can optionaly pass `$c['response']` in `__construct` second parameter
+    $view->setResponse($c['response']);
+
     // Instantiate and add Slim specific extension
     $view->loadExtension(
         new Projek\Slim\PlatesExtension($c['router'], $c['request']->getUri())
