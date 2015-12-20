@@ -37,12 +37,14 @@ $container->register(new \Projek\Slim\PlatesProvider);
 // Option 2, using Closure
 $container['view'] = function ($c) {
     $settings = [
-        // Path to view directory
+        // Path to view directory (default: null)
         'directory' => 'path/to/views',
-        // Path to asset directory
+        // Path to asset directory (default: null)
         'assetPath' => 'path/to/static/assets',
         // Template extension (default: 'php')
         'fileExtension' => 'tpl',
+        // Template extension (default: false) see: http://platesphp.com/extensions/asset/
+        'timestampInFilename' => false,
     ];
     $view = new \Projek\Slim\Plates($settings);
 
