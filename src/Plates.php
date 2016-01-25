@@ -86,12 +86,13 @@ class Plates
     /**
      * Add a new template folder for grouping templates under different namespaces.
      *
-     * @param string  $name
-     * @param string  $directory
-     * @param boolean $fallback
+     * @param string $name
+     * @param string $directory
+     * @param bool   $fallback
+     *
+     * @throws \LogicException
      *
      * @return \League\Plates\Engine
-     * @throws \LogicException
      */
     public function addFolder($name, $directory, $fallback = false)
     {
@@ -104,8 +105,9 @@ class Plates
      * @param array         $data
      * @param null|string[] $templates
      *
-     * @return \League\Plates\Engine
      * @throws \LogicException
+     *
+     * @return \League\Plates\Engine
      */
     public function addData(array $data, $templates = null)
     {
@@ -118,8 +120,9 @@ class Plates
      * @param string   $name
      * @param callable $callback
      *
-     * @return \League\Plates\Engine
      * @throws \LogicException
+     *
+     * @return \League\Plates\Engine
      */
     public function registerFunction($name, $callback)
     {
@@ -146,8 +149,9 @@ class Plates
      * @param string   $name
      * @param string[] $data
      *
-     * @return \Psr\Http\Message\ResponseInterface
      * @throws \LogicException
+     *
+     * @return \Psr\Http\Message\ResponseInterface
      */
     public function render($name, array $data = [])
     {
