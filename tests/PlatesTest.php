@@ -1,7 +1,6 @@
 <?php
 namespace Projek\Slim\Tests;
 
-use Projek\Slim\Plates;
 use League\Plates\Engine;
 use Psr\Http\Message\ResponseInterface;
 use Slim\Http\Response;
@@ -35,7 +34,7 @@ class PlatesTest extends TestCase
         $this->view->setResponse($mockResponse);
 
         $response = $this->view->render('example', [
-            'name' => 'Fery'
+            'name' => 'Fery',
         ]);
 
         $this->assertInstanceOf(ResponseInterface::class, $response);
@@ -47,7 +46,7 @@ class PlatesTest extends TestCase
     public function testInvalidResponseObj()
     {
         $response = $this->view->render('example', [
-            'name' => 'Fery'
+            'name' => 'Fery',
         ]);
     }
 }

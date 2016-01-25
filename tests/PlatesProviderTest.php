@@ -1,9 +1,9 @@
 <?php
 namespace Projek\Slim\Tests;
 
-use Slim\App;
 use League\Plates\Engine;
 use Projek\Slim\PlatesProvider;
+use Slim\App;
 
 class PlatesProviderTest extends TestCase
 {

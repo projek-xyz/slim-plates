@@ -29,7 +29,7 @@ class Plates
     private $response;
 
     /**
-     * Create new Projek\Slim\Plates instance
+     * Create new Projek\Slim\Plates instance.
      *
      * @param string[]                                 $settings
      * @param null|\Psr\Http\Message\ResponseInterface $response
@@ -46,7 +46,7 @@ class Plates
     }
 
     /**
-     * Get the Plate Engine
+     * Get the Plate Engine.
      *
      * @return \League\Plates\Engine
      */
@@ -56,7 +56,7 @@ class Plates
     }
 
     /**
-     * Set Asset path from Plates Asset Extension
+     * Set Asset path from Plates Asset Extension.
      *
      * @param  string $assetPath
      * @return \League\Plates\Engine
@@ -69,7 +69,7 @@ class Plates
     }
 
     /**
-     * Set Asset path from Plates Asset Extension
+     * Set Asset path from Plates Asset Extension.
      *
      * @param  \League\Plates\Extension\ExtensionInterface $extension
      * @return \League\Plates\Engine
@@ -122,7 +122,7 @@ class Plates
     }
 
     /**
-     * Set response
+     * Set response.
      *
      * @param  \Psr\Http\Message\ResponseInterface $response
      * @return self
@@ -135,7 +135,7 @@ class Plates
     }
 
     /**
-     * Render the template
+     * Render the template.
      *
      * @param  string   $name
      * @param  string[] $data
@@ -144,7 +144,7 @@ class Plates
      */
     public function render($name, array $data = [])
     {
-        if (! isset($this->response)) {
+        if (!isset($this->response)) {
             throw new \LogicException(
                 sprintf('Invalid %s object instance', ResponseInterface::class)
             );

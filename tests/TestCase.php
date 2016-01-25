@@ -1,9 +1,8 @@
 <?php
 namespace Projek\Slim\Tests;
 
-use Projek\Slim\Plates;
 use PHPUnit_Framework_TestCase;
-use DateTimeZone;
+use Projek\Slim\Plates;
 
 abstract class TestCase extends PHPUnit_Framework_TestCase
 {
@@ -13,7 +12,7 @@ abstract class TestCase extends PHPUnit_Framework_TestCase
     protected $view;
 
     /**
-     * Slim Application settings
+     * Slim Application settings.
      *
      * @var array
      */

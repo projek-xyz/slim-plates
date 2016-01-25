@@ -31,10 +31,9 @@ class PlatesExtension implements ExtensionInterface
     }
 
     /**
-     * Register extension function
+     * Register extension function.
      *
-     * @param  \League\Plates\Engine $engine Plates instance
-     * @return void
+     * @param \League\Plates\Engine $engine Plates instance
      */
     public function register(Engine $engine)
     {
@@ -51,9 +50,9 @@ class PlatesExtension implements ExtensionInterface
     }
 
     /**
-     * Retrieve slim baseUrl
+     * Retrieve slim baseUrl.
      *
-     * @param  string $permalink You can add optional permalink
+     * @param string $permalink You can add optional permalink
      * @return string
      */
     public function baseUrl($permalink = '')
@@ -62,7 +61,7 @@ class PlatesExtension implements ExtensionInterface
     }
 
     /**
-     * Retrieve slim uri (string)
+     * Retrieve slim uri (string).
      *
      * @return string
      */

@@ -1,11 +1,10 @@
 <?php
 namespace Projek\Slim\Tests;
 
-use Slim\Router;
-use Slim\Http\Uri;
-use Slim\Http\Environment;
 use League\Plates\Engine;
 use Projek\Slim\PlatesExtension;
+use Slim\Http\Uri;
+use Slim\Router;
 
 class PlatesExtensionTest extends TestCase
 {

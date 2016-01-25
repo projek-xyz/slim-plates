@@ -1,14 +1,14 @@
 <?php
 namespace Projek\Slim;
 
+use InvalidArgumentException;
 use Pimple\Container;
 use Pimple\ServiceProviderInterface;
-use InvalidArgumentException;
 
 class PlatesProvider implements ServiceProviderInterface
 {
     /**
-     * Register this plates view provider with a Pimple container
+     * Register this plates view provider with a Pimple container.
      *
      * @param \Pimple\Container $container
      */
