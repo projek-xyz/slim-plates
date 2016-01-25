@@ -40,4 +40,14 @@ class PlatesTest extends TestCase
 
         $this->assertInstanceOf(ResponseInterface::class, $response);
     }
+
+    /**
+     * @expectedException \LogicException
+     */
+    public function testInvalidResponseObj()
+    {
+        $response = $this->view->render('example', [
+            'name' => 'Fery'
+        ]);
+    }
 }

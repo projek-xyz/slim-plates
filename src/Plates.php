@@ -88,6 +88,7 @@ class Plates
      * @param  string  $directory
      * @param  boolean $fallback
      * @return \League\Plates\Engine
+     * @throws \LogicException
      */
     public function addFolder($name, $directory, $fallback = false)
     {
@@ -100,6 +101,7 @@ class Plates
      * @param  array         $data
      * @param  null|string[] $templates
      * @return \League\Plates\Engine
+     * @throws \LogicException
      */
     public function addData(array $data, $templates = null)
     {
@@ -112,6 +114,7 @@ class Plates
      * @param  string   $name
      * @param  callable $callback
      * @return \League\Plates\Engine
+     * @throws \LogicException
      */
     public function registerFunction($name, $callback)
     {
@@ -137,9 +140,16 @@ class Plates
      * @param  string   $name
      * @param  string[] $data
      * @return \Psr\Http\Message\ResponseInterface
+     * @throws \LogicException
      */
     public function render($name, array $data = [])
     {
+        if (! isset($this->response)) {
+            throw new \LogicException(
+                sprintf('Invalid %s object instance', ResponseInterface::class)
+            );
+        }
+
         return $this->response->write($this->plates->render($name, $data));
     }
 }

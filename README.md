@@ -36,7 +36,7 @@ $container->register(new \Projek\Slim\PlatesProvider);
 
 // Option 2, using Closure
 $container['view'] = function ($c) {
-    $settings = [
+    $view = new \Projek\Slim\Plates([
         // Path to view directory (default: null)
         'directory' => 'path/to/views',
         // Path to asset directory (default: null)
@@ -45,24 +45,24 @@ $container['view'] = function ($c) {
         'fileExtension' => 'tpl',
         // Template extension (default: false) see: http://platesphp.com/extensions/asset/
         'timestampInFilename' => false,
-    ];
-    $view = new \Projek\Slim\Plates($settings);
+    ]);
 
     // Set \Psr\Http\Message\ResponseInterface object
-    // Or you can optionaly pass `$c['response']` in `__construct` second parameter
-    $view->setResponse($c['response']);
+    // Or you can optionaly pass `$c->get('response')` in `__construct` second parameter
+    $view->setResponse($c->get('response'));
 
     // Instantiate and add Slim specific extension
-    $view->loadExtension(
-        new Projek\Slim\PlatesExtension($c['router'], $c['request']->getUri())
-    );
+    $view->loadExtension(new Projek\Slim\PlatesExtension(
+        $c->get('router'),
+        $c->get('request')->getUri()
+    ));
 
     return $view;
 };
 
 // Define named route
 $app->get('/hello/{name}', function ($request, $response, $args) {
-    return $this->view->render($response, 'profile', [
+    return $this->view->render('profile', [
         'name' => $args['name']
     ]);
 })->setName('profile');
@@ -71,7 +71,9 @@ $app->get('/hello/{name}', function ($request, $response, $args) {
 $app->run();
 ```
 
-**NOTE**: if you are using _option 1_ please make sure you already have `$container['settings']['view']` in your configuration file.
+**NOTE**:
+* If you are using _option 1_ please make sure you already have `$container['settings']['view']` in your configuration file.
+* `Plates::setResponse()` is required to use `Plates::render()` otherwise `\LogicException` will thrown.
 
 ## Custom functions
 
