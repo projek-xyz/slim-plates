@@ -58,7 +58,8 @@ class Plates
     /**
      * Set Asset path from Plates Asset Extension.
      *
-     * @param  string $assetPath
+     * @param string $assetPath
+     *
      * @return \League\Plates\Engine
      */
     public function setAssetPath($assetPath)
@@ -71,7 +72,8 @@ class Plates
     /**
      * Set Asset path from Plates Asset Extension.
      *
-     * @param  \League\Plates\Extension\ExtensionInterface $extension
+     * @param \League\Plates\Extension\ExtensionInterface $extension
+     *
      * @return \League\Plates\Engine
      */
     public function loadExtension(ExtensionInterface $extension)
@@ -84,9 +86,10 @@ class Plates
     /**
      * Add a new template folder for grouping templates under different namespaces.
      *
-     * @param  string  $name
-     * @param  string  $directory
-     * @param  boolean $fallback
+     * @param string  $name
+     * @param string  $directory
+     * @param boolean $fallback
+     *
      * @return \League\Plates\Engine
      * @throws \LogicException
      */
@@ -98,8 +101,9 @@ class Plates
     /**
      * Add preassigned template data.
      *
-     * @param  array         $data
-     * @param  null|string[] $templates
+     * @param array         $data
+     * @param null|string[] $templates
+     *
      * @return \League\Plates\Engine
      * @throws \LogicException
      */
@@ -111,8 +115,9 @@ class Plates
     /**
      * Register a new template function.
      *
-     * @param  string   $name
-     * @param  callable $callback
+     * @param string   $name
+     * @param callable $callback
+     *
      * @return \League\Plates\Engine
      * @throws \LogicException
      */
@@ -124,7 +129,8 @@ class Plates
     /**
      * Set response.
      *
-     * @param  \Psr\Http\Message\ResponseInterface $response
+     * @param \Psr\Http\Message\ResponseInterface $response
+     *
      * @return self
      */
     public function setResponse(ResponseInterface $response)
@@ -137,8 +143,9 @@ class Plates
     /**
      * Render the template.
      *
-     * @param  string   $name
-     * @param  string[] $data
+     * @param string   $name
+     * @param string[] $data
+     *
      * @return \Psr\Http\Message\ResponseInterface
      * @throws \LogicException
      */

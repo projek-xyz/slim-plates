@@ -53,6 +53,7 @@ class PlatesExtension implements ExtensionInterface
      * Retrieve slim baseUrl.
      *
      * @param string $permalink You can add optional permalink
+     *
      * @return string
      */
     public function baseUrl($permalink = '')
