@@ -18,7 +18,6 @@ coveralls-upload.json
 # Dependency folders
 # --------------------------
 composer.lock
-node_modules/
 vendor/
 
 # IDE Project Configurations

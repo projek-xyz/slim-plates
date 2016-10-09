@@ -1,15 +1,15 @@
 engines:
-    fixme:
-        enabled: true
-    phpcodesniffer:
-        enabled: true
-    phpmd:
-        enabled: true
+  fixme:
+    enabled: true
+  phpcodesniffer:
+    enabled: true
+  phpmd:
+    enabled: true
 
 ratings:
-    paths:
-        - src/**.php
+  paths:
+    - src/**.php
 
 exclude_paths:
-    - tests/**/*
-    - vendor/**/*
+  - tests/**/*
+  - vendor/**/*

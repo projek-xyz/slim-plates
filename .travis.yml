@@ -3,45 +3,42 @@ language: php
 sudo: false
 
 cache:
-    directories:
-        - ~/.composer/cache
-        - vendor
+  directories:
+    - ~/.composer/cache
+    - vendor
 
 matrix:
-    fast_finish: true
-    include:
-        # Use the newer stack for HHVM as HHVM does not support Precise anymore since a long time and so Precise has an outdated version
-        - php: hhvm-stable
-          sudo: required
-          dist: trusty
-          group: edge
-        - php: 5.5
-          env: setup=resource
-        - php: 5.5
-          env: setup=coverage
-        - php: 5.6
-        - php: 7.0
-        - php: 7.1
-    allow_failures:
-        - php: 7.1
-        - php: hhvm-stable
+  fast_finish: true
+  include:
+    # Use the newer stack for HHVM as HHVM does not support Precise anymore since a long time and so Precise has an outdated version
+    - php: hhvm-stable
+      sudo: required
+      dist: trusty
+      group: edge
+    - php: 5.5
+      env: setup=coverage
+    - php: 5.6
+    - php: 7.0
+    - php: 7.1
+  allow_failures:
+    - php: 7.1
+    - php: hhvm-stable
 
 install:
-    - if [[ ! $setup ]]; then composer install -n -q; fi
-    - if [[ $setup = coverage ]]; then composer require codeclimate/php-test-reporter:~0.3 -n -q; fi
+  - if [[ ! $setup ]]; then composer install -n -q; fi
+  - if [[ $setup = coverage ]]; then composer require codeclimate/php-test-reporter:~0.3 -n -q; fi
 
 script:
-    - composer lint
-    - if [[ ! $setup ]]; then composer test; fi
-    - if [[ $setup = coverage ]]; then ./vendor/bin/phpunit -c tests/phpunit.xml --coverage-clover build/logs/clover.xml; fi
+  - if [[ ! $setup ]]; then composer lint && composer test; fi
+  - if [[ $setup = coverage ]]; then ./vendor/bin/phpunit -c tests/phpunit.xml --coverage-clover build/logs/clover.xml; fi
 
 after_success:
-    - export CI_BUILD_NUMBER="$TRAVIS_BUILD_NUMBER"; export CI_PULL_REQUEST="$TRAVIS_PULL_REQUEST"; export CI_BRANCH="$TRAVIS_BRANCH"
-    - if [[ $setup = coverage ]]; then ./vendor/bin/test-reporter &&  ./vendor/bin/coveralls -v; fi
+  - export CI_BUILD_NUMBER="$TRAVIS_BUILD_NUMBER"; export CI_PULL_REQUEST="$TRAVIS_PULL_REQUEST"; export CI_BRANCH="$TRAVIS_BRANCH"
+  - if [[ $setup = coverage ]]; then ./vendor/bin/test-reporter &&  ./vendor/bin/coveralls -v; fi
 
 branches:
-    except:
-        - /^v\d\..*/ # Exclude tags with 'v' as prefix
+  except:
+    - /^v\d\..*/ # Exclude tags with 'v' as prefix
 
 notifications:
-    email: false
+  email: false

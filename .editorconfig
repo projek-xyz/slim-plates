@@ -12,5 +12,8 @@ indent_style = space
 [{src,tests}/**.php]
 indent_size = 4
 
-[*.{json,yml,tpl}]
+[{*,!vendor/*}.json]
 indent_size = 4
+
+[{*,!vendor/*}.yml]
+indent_size = 2
