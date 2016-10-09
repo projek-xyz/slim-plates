@@ -1,7 +1,34 @@
-.idea/
+# Generic
+# --------------------------
+Desktop.ini
+Icon?
 .directory
-composer.lock
-vendor
-clover.xml
+*.cache
+*.old
+*.log
+*.zip
+*~
+
+# Development files
+# --------------------------
+.php-version
+tests/clover.xml
 coveralls-upload.json
+
+# Dependency folders
+# --------------------------
+composer.lock
+node_modules/
+vendor/
+
+# IDE Project Configurations
+# --------------------------
+.idea
+.settings
+.project
 *.sublime-*
+
+# But Keep these
+# --------------------------
+!.gitkeep
+

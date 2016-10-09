@@ -9,13 +9,20 @@ php:
     - hhvm
 
 install:
-    - if [[ "$TRAVIS_PHP_VERSION" == '5.6' ]]; then composer require satooshi/php-coveralls:dev-master squizlabs/php_codesniffer:dev-master -n ; fi
-    - if [[ "$TRAVIS_PHP_VERSION" != '5.6' ]]; then composer install -n ; fi
+    - if [[ "$TRAVIS_PHP_VERSION" == '5.6' ]]; then composer require codeclimate/php-test-reporter:~0.3 -n -q; fi
+    - if [[ "$TRAVIS_PHP_VERSION" != '5.6' ]]; then composer install -n -q; fi
+
+before_script:
+  - export CLOVER_PATH=tests/clover.xml
 
 script:
-    - if [[ "$TRAVIS_PHP_VERSION" == '5.6' ]]; then php vendor/bin/phpunit --coverage-clover clover.xml ; fi
-    - if [[ "$TRAVIS_PHP_VERSION" != '5.6' ]]; then php vendor/bin/phpunit --coverage-text ; fi
-    - if [[ "$TRAVIS_PHP_VERSION" == '5.6' ]]; then php vendor/bin/phpcs --standard=PSR2 -n -p src/ ; fi
+    - composer lint
+    - if [[ "$TRAVIS_PHP_VERSION" == '5.6' ]]; then php vendor/bin/phpunit -c tests/phpunit.xml --coverage-clover $CLOVER_PATH; fi
+    - if [[ "$TRAVIS_PHP_VERSION" != '5.6' ]]; then composer test; fi
 
 after_script:
-    - if [[ "$TRAVIS_PHP_VERSION" == '5.6' ]]; then php vendor/bin/coveralls -v ; fi
+    - export CI_BUILD_NUMBER="$TRAVIS_BUILD_NUMBER"
+    - export CI_PULL_REQUEST="$TRAVIS_PULL_REQUEST"
+    - export CI_BRANCH="$TRAVIS_BRANCH"
+    - if [[ $TRAVIS_PHP_VERSION == '5.6' ]]; then php vendor/bin/coveralls --coverage_clover $CLOVER_PATH -v; fi
+    - if [[ $TRAVIS_PHP_VERSION == '5.6' ]]; then php vendor/bin/test-reporter --coverage-report $CLOVER_PATH; fi
