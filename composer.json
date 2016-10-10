@@ -27,7 +27,7 @@
     },
     "autoload-dev": {
         "psr-4": {
-            "Projek\\Slim\\Tests\\": "tests/"
+            "Projek\\Slim\\Tests\\": "tests/src/"
         }
     },
     "minimum-stability": "dev",

@@ -10,7 +10,7 @@ class PlatesTest extends TestCase
     public function testShoudReturnsPlatesEngine()
     {
         $this->assertInstanceOf(Engine::class, $this->view->getPlates());
-        $this->assertInstanceOf(Engine::class, $this->view->addFolder('foo', __DIR__.'/templates'));
+        $this->assertInstanceOf(Engine::class, $this->view->addFolder('foo', $this->settings['directory']));
         $this->assertInstanceOf(Engine::class, $this->view->addData(['foo' => 'bar']));
         $this->assertInstanceOf(
             Engine::class,
@@ -33,11 +33,10 @@ class PlatesTest extends TestCase
 
         $this->view->setResponse($mockResponse);
 
-        $response = $this->view->render('example', [
-            'name' => 'Fery',
-        ]);
-
-        $this->assertInstanceOf(ResponseInterface::class, $response);
+        $this->assertInstanceOf(
+            ResponseInterface::class,
+            $this->view->render('example', ['name' => 'Fery'])
+        );
     }
 
     /**
@@ -45,8 +44,6 @@ class PlatesTest extends TestCase
      */
     public function testInvalidResponseObj()
     {
-        $response = $this->view->render('example', [
-            'name' => 'Fery',
-        ]);
+        $this->view->render('example', ['name' => 'Fery']);
     }
 }

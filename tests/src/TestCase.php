@@ -24,7 +24,7 @@ abstract class TestCase extends PHPUnit_Framework_TestCase
 
     public function setUp()
     {
-        $this->settings['directory'] = __DIR__.'/templates';
+        $this->settings['directory'] = dirname(__DIR__).'/fixtures';
         $this->view = new Plates($this->settings);
     }
 }

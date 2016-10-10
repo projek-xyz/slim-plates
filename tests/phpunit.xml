@@ -16,7 +16,7 @@
 
     <testsuites>
         <testsuite name="Slim Plates View Test Suite">
-            <directory>.</directory>
+            <directory>./src</directory>
         </testsuite>
     </testsuites>
 
