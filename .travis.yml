@@ -5,7 +5,6 @@ sudo: false
 cache:
   directories:
     - ~/.composer/cache
-    - composer.lock
     - vendor
 
 matrix:
