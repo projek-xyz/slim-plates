@@ -1,6 +1,6 @@
 {
     "name": "projek-xyz/slim-plates",
-    "description": "Slim micro framework view helper built on top of the Plates templating component",
+    "description": "Render your Slim 3 application views using Plates template engine.",
     "keywords": ["slim", "microframework", "framework", "view", "template", "plates", "library"],
     "homepage": "http://www.projek.xyz/slim-plates",
     "type": "library",
