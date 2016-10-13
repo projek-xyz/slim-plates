@@ -1,15 +1,14 @@
 {
     "name": "projek-xyz/slim-plates",
-    "description": "Slim Framework 3 view helper built on top of the Plates templating component",
-    "keywords": ["slim","framework","view","template","plates"],
+    "description": "Slim micro framework view helper built on top of the Plates templating component",
+    "keywords": ["slim", "microframework", "framework", "view", "template", "plates", "library"],
     "homepage": "http://www.projek.xyz/slim-plates",
     "type": "library",
     "license": "MIT",
     "authors": [
         {
             "name": "Fery Wardiyanto",
-            "email": "hallo@feryardiant.me",
-            "homepage": "http://feryardiant.me"
+            "email": "feryardiyanto@gmail.com"
         }
     ],
     "support": {
@@ -30,17 +29,16 @@
             "Projek\\Slim\\Tests\\": "tests/src/"
         }
     },
-    "minimum-stability": "dev",
-    "prefer-stable": true,
     "require": {
-        "php": ">=5.5.0",
         "league/plates": "~3.1",
-        "slim/slim": "~3.0"
+        "slim/slim": "~3.5"
     },
     "require-dev": {
         "phpunit/phpunit": "~4.0",
         "squizlabs/php_codesniffer": "~2.7"
     },
+    "minimum-stability": "dev",
+    "prefer-stable": true,
     "extra": {
         "branch-alias": {
             "dev-master": "0.2-dev"
