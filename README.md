@@ -8,7 +8,7 @@
 [![Code Climate](https://img.shields.io/codeclimate/github/projek-xyz/slim-plates.svg?style=flat-square)](https://codeclimate.com/github/projek-xyz/slim-plates)
 [![SensioLabs Insight](https://img.shields.io/sensiolabs/i/0b18f66c-8041-47c3-8004-6eef2b940d30.svg?style=flat-square)](https://insight.sensiolabs.com/projects/0b18f66c-8041-47c3-8004-6eef2b940d30)
 
-Render your Slim 3 application views using Plates template engine.
+Render your Slim 3 application views using Plates template engine.
 
 ## Install
 
@@ -147,4 +147,4 @@ Please see [CONTRIBUTING](.github/CONTRIBUTING.md) and [CONDUCT](.github/CONDUCT
 
 ## License
 
-This library is open-sourced software licensed under [MIT license](LICENSE.md).
+This library is open-sourced software licensed under [MIT license](LICENSE.md).
