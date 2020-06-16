@@ -1,0 +1,22 @@
+{
+    "name": "@projek-xyz/slim-plates",
+    "private": true,
+    "version": "0.2.2",
+    "author": "Fery Wardiyanto <ferywardiyanto@gmail.com>",
+    "repository": "github:projek-xyz/slim-plates",
+    "scripts": {
+        "release": "standard-version -s"
+    },
+    "devDependencies": {
+        "@commitlint/cli": "^8.3.5",
+        "@commitlint/config-conventional": "^8.3.4",
+        "@feryardiant/read-changelog": "^0.1.1",
+        "standard-version": "^8.0.0"
+    },
+    "commitlint": {
+        "extends": [
+            "@commitlint/config-conventional"
+        ]
+    },
+    "standard-version": {}
+}
