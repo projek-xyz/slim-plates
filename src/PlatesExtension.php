@@ -63,7 +63,7 @@ class PlatesExtension implements ExtensionInterface
      *
      * @return string
      */
-    public function baseUrl($permalink = '')
+    public function baseUrl($permalink = '') : string
     {
         return $this->context->getBasePath().'/'.ltrim($permalink, '/');
     }
@@ -73,7 +73,7 @@ class PlatesExtension implements ExtensionInterface
      *
      * @return string
      */
-    public function uriFull()
+    public function uriFull() : string
     {
         return (string) $this->uri;
     }

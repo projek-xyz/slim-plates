@@ -55,7 +55,7 @@ class Plates
      *
      * @return Engine
      */
-    public function getPlates()
+    public function getPlates() : Engine
     {
         return $this->plates;
     }
@@ -67,7 +67,7 @@ class Plates
      *
      * @return Engine
      */
-    public function setAssetPath($assetPath)
+    public function setAssetPath($assetPath) : Engine
     {
         return $this->plates->loadExtension(
             new Asset($assetPath, $this->settings['timestampInFilename'])
@@ -81,7 +81,7 @@ class Plates
      *
      * @return Engine
      */
-    public function loadExtension(ExtensionInterface $extension)
+    public function loadExtension(ExtensionInterface $extension) : Engine
     {
         $extension->register($this->plates);
 
@@ -99,7 +99,7 @@ class Plates
      *
      * @return Engine
      */
-    public function addFolder($name, $directory, $fallback = false)
+    public function addFolder($name, $directory, $fallback = false) : Engine
     {
         return $this->plates->addFolder($name, $directory, $fallback);
     }
@@ -114,7 +114,7 @@ class Plates
      *
      * @return Engine
      */
-    public function addData(array $data, $templates = null)
+    public function addData(array $data, $templates = null) : Engine
     {
         return $this->plates->addData($data, $templates);
     }
@@ -129,7 +129,7 @@ class Plates
      *
      * @return Engine
      */
-    public function registerFunction($name, $callback)
+    public function registerFunction($name, $callback) : Engine
     {
         return $this->plates->registerFunction($name, $callback);
     }
@@ -143,9 +143,9 @@ class Plates
      *
      * @throws \LogicException
      *
-     * @return StreamFactoryInterface
+     * @return ResponseInterface
      */
-    public function render(ResponseInterface $response, $name, array $data = [])
+    public function render(ResponseInterface $response, $name, array $data = []) : ResponseInterface
     {
         $rendered = $this->streamFactory->createStream(
             $this->plates->render($name, $data)
