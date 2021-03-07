@@ -8,14 +8,13 @@
         "release": "standard-version -s"
     },
     "devDependencies": {
-        "@commitlint/cli": "^8.3.5",
-        "@commitlint/config-conventional": "^8.3.4",
-        "@feryardiant/read-changelog": "^0.1.1",
-        "standard-version": "^8.0.0"
+        "@commitlint/cli": "^11.0",
+        "@feryardiant/commitlint-config": "~0.0.1",
+        "standard-version": "^9.0"
     },
     "commitlint": {
         "extends": [
-            "@commitlint/config-conventional"
+            "@feryardiant/commitlint-config"
         ]
     },
     "standard-version": {}
