@@ -8,8 +8,8 @@
         "release": "standard-version -s"
     },
     "devDependencies": {
-        "@commitlint/cli": "^11.0",
-        "@feryardiant/commitlint-config": "~0.0.1",
+        "@commitlint/cli": "^12.0",
+        "@feryardiant/commitlint-config": "~0.0.3",
         "standard-version": "^9.0"
     },
     "commitlint": {
