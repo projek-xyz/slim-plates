@@ -7,9 +7,10 @@ on:
   push:
     branches:
       - master
-    # paths:
-    #   - src/*
-    #   - test/*
+    paths:
+      - .github/workflows/test.yml
+      - src/*
+      - test/*
 
 env:
   COVERALLS_REPO_TOKEN: ${{ secrets.COVERALLS_REPO_TOKEN }}
@@ -19,14 +20,14 @@ env:
 jobs:
   test:
     name: Runs on PHP ${{ matrix.php-versions }}
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-20.04
     env:
       GIT_COMMIT_SHA: ${{ github.sha }}
       GIT_BRANCH: ${{ github.ref }}
 
     strategy:
       matrix:
-        php-versions: ['7.1', '7.2', '7.3', '7.4']
+        php-versions: ['7.2', '7.3', '7.4', '8.0']
 
     steps:
     - name: Checkout
@@ -41,7 +42,7 @@ jobs:
     - name: Get Composer cache directory
       id: composer-cache
       run: |
-        echo "::set-env name=GIT_BRANCH::${GIT_BRANCH##*/}"
+        echo "GIT_BRANCH=$(echo ${GIT_BRANCH##*/} | tr / -)" >> $GITHUB_ENV
         echo "::set-output name=dir::$(composer config cache-files-dir)"
 
     - name: Cache Composer dependencies
@@ -58,7 +59,7 @@ jobs:
     # https://github.com/deivid-rodriguez/pry-byebug/blob/377e5b7d229a157bb896f21d776f71fc389a5c00/.github/workflows/ubuntu.yml#L46-L57
     - name: Set ENV for CodeClimate (pull_request)
       if: github.event_name == 'pull_request'
-      run: echo "::set-env name=GIT_BRANCH::$GITHUB_HEAD_REF"
+      run: echo "GIT_BRANCH=$(echo ${GITHUB_HEAD_REF} | tr / -)" >> $GITHUB_ENV
 
     - name: Spec
       run: composer spec
