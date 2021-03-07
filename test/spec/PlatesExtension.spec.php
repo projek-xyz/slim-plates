@@ -1,121 +1,113 @@
 <?php
 
-use Kahlan\Plugin\Double;
-use League\Plates\Engine;
-use Projek\Slim\Plates;
 use Projek\Slim\PlatesExtension;
-use Slim\Psr7\Factory\ServerRequestFactory;
-use Slim\Psr7\Factory\StreamFactory;
-use Slim\Routing\RouteContext;
-use Slim\Routing\RouteParser;
-use Slim\Routing\RoutingResults;
+use Slim\CallableResolver;
+use Slim\Psr7\Factory\{ResponseFactory, ServerRequestFactory, UriFactory};
+use Slim\Routing\{Dispatcher, RouteCollector, RouteContext, RouteParser, RoutingResults};
 
-use function Kahlan\describe;
-use function Kahlan\skipIf;
+use function Kahlan\{beforeEach, describe, expect, it};
 
 describe(PlatesExtension::class, function () {
-    skipIf(true);
-
     beforeEach(function () {
+        $view = $this->view();
+        $basePath = 'http://example.com';
+        $routes = new RouteCollector(
+            new ResponseFactory(),
+            new CallableResolver()
+        );
 
-        $this->view = new Plates([
-            'directory'     => dirname(__DIR__).'/stub',
-            'assetPath'     => '',
-            'fileExtension' => 'tpl',
-        ], new StreamFactory);
+        $routes->map(['GET'], '/coba', function ($req, $res) {
+            return $res;
+        })->setName('coba');
 
-        $this->request = (new ServerRequestFactory())
-            ->createServerRequest('GET', 'http://example.com')
-            ->withAttribute(RouteContext::ROUTING_RESULTS, Double::instance(['extends' => [RoutingResults::class]]))
-            ->withAttribute(RouteContext::ROUTE_PARSER, Double::instance(['extends' => [RouteParser::class]]));
+        $this->uri = (new UriFactory)->createUri('http://example.com/coba?foo=bar#baz');
+        $results = new RoutingResults(new Dispatcher($routes), 'GET', $basePath, RoutingResults::FOUND);
+        $request = (new ServerRequestFactory())->createServerRequest($results->getMethod(), $this->uri)
+            ->withAttribute(RouteContext::ROUTING_RESULTS, $results)
+            ->withAttribute(RouteContext::ROUTE_PARSER, new RouteParser($routes))
+            ->withAttribute(RouteContext::BASE_PATH, $basePath);
 
-        $this->view->loadExtension(new PlatesExtension($this->request));
+        $view->loadExtension(new PlatesExtension($request));
 
-        $this->getFunction = function (string $name) {
-            /** @var Engine $engine */
-            $engine = $this->view->getPlates();
+        $this->getFunc = function (string $name, ...$params) use ($view) {
+            /** @var \League\Plates\Engine $engine */
+            $engine = $view->getPlates();
 
             expect($engine->doesFunctionExist($name))->toBeTruthy();
 
-            return $engine->getFunction($name);
+            return call_user_func_array($engine->getFunction($name)->getCallback(), $params);
         };
     });
 
     it('Should have baseUrl function', function () {
-        $func = $this->getFunction('baseUrl');
-
-        expect($func)->toThrow(Throwable::class);
+        expect(
+            $this->getFunc('baseUrl', 'coba')
+        )->toEqual('http://example.com/coba');
     });
 
     it('Should have uriFull function', function () {
-        $func = $this->getFunction('uriFull');
-
-        expect($func)->toThrow(Throwable::class);
-    });
-
-    it('Should have route function', function () {
-        $func = $this->getFunction('route');
-
-        expect($func)->toThrow(Throwable::class);
+        expect(
+            $this->getFunc('uriFull', 'coba')
+        )->toEqual('http://example.com/coba?foo=bar#baz');
     });
 
     it('Should have basePath function', function () {
-        $func = $this->getFunction('basePath');
-
-        expect($func)->toThrow(Throwable::class);
+        expect(
+            $this->getFunc('basePath')
+        )->toEqual('http://example.com');
     });
 
     it('Should have urlFor function', function () {
-        $func = $this->getFunction('urlFor');
-
-        expect($func)->toThrow(Throwable::class);
+        expect(
+            $this->getFunc('urlFor', 'coba')
+        )->toEqual('/coba');
     });
 
     it('Should have fullUrlFor function', function () {
-        $func = $this->getFunction('fullUrlFor');
-
-        expect($func)->toThrow(Throwable::class);
+        expect(
+            $this->getFunc('fullUrlFor', $this->uri, 'coba')
+        )->toEqual('http://example.com/coba');
     });
 
     it('Should have relativeUrlFor function', function () {
-        $func = $this->getFunction('relativeUrlFor');
-
-        expect($func)->toThrow(Throwable::class);
+        expect(
+            $this->getFunc('relativeUrlFor', 'coba')
+        )->toEqual('/coba');
     });
 
     it('Should have uriScheme function', function () {
-        $func = $this->getFunction('uriScheme');
-
-        expect($func)->toThrow(Throwable::class);
+        expect(
+            $this->getFunc('uriScheme')
+        )->toEqual('http');
     });
 
     it('Should have uriHost function', function () {
-        $func = $this->getFunction('uriHost');
-
-        expect($func)->toThrow(Throwable::class);
+        expect(
+            $this->getFunc('uriHost')
+        )->toEqual('example.com');
     });
 
     it('Should have uriPort function', function () {
-        $func = $this->getFunction('uriPort');
-
-        expect($func)->toThrow(Throwable::class);
+        expect(
+            $this->getFunc('uriPort')
+        )->toBeNull();
     });
 
     it('Should have uriPath function', function () {
-        $func = $this->getFunction('uriPath');
-
-        expect($func)->toThrow(Throwable::class);
+        expect(
+            $this->getFunc('uriPath')
+        )->toEqual('/coba');
     });
 
     it('Should have uriQuery function', function () {
-        $func = $this->getFunction('uriQuery');
-
-        expect($func)->toThrow(Throwable::class);
+        expect(
+            $this->getFunc('uriQuery')
+        )->toEqual('foo=bar');
     });
 
     it('Should have uriFragment function', function () {
-        $func = $this->getFunction('uriFragment');
-
-        expect($func)->toThrow(Throwable::class);
+        expect(
+            $this->getFunc('uriFragment')
+        )->toEqual('baz');
     });
 });
