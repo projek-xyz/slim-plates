@@ -1,12 +1,14 @@
 # Generic
 # --------------------------
+Thumbs.db
 Desktop.ini
-Icon?
 .directory
 *.cache
 *.old
 *.log
+*.tmp
 *.zip
+._
 *~
 
 # Development files
@@ -17,17 +19,19 @@ coveralls-upload.json
 
 # Dependency folders
 # --------------------------
-composer.lock
-vendor/
+node_modules
+package-lock.json
+vendor
+yarn.lock
 
 # IDE Project Configurations
 # --------------------------
 .idea
 .settings
+.vscode
 .project
 *.sublime-*
 
 # But Keep these
 # --------------------------
 !.gitkeep
-

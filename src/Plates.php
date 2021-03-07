@@ -5,11 +5,14 @@ use League\Plates\Engine;
 use League\Plates\Extension\Asset;
 use League\Plates\Extension\ExtensionInterface;
 use Psr\Http\Message\ResponseInterface;
+use Psr\Http\Message\StreamFactoryInterface;
 
 class Plates
 {
     /**
-     * @var string[]
+     * Default settings.
+     *
+     * @var array<string, mixed>
      */
     private $settings = [
         'directory' => null,
@@ -19,26 +22,28 @@ class Plates
     ];
 
     /**
-     * @var \League\Plates\Engine
+     * Plates Engine instance.
+     *
+     * @var Engine
      */
     private $plates;
 
     /**
-     * @var \Psr\Http\Message\ResponseInterface
+     * @var StreamFactoryInterface
      */
-    private $response;
+    private $streamFactory;
 
     /**
      * Create new Projek\Slim\Plates instance.
      *
-     * @param string[]                                 $settings
-     * @param null|\Psr\Http\Message\ResponseInterface $response
+     * @param array<string, mixed>    $settings
+     * @param StreamFactoryInterface  $streamFactory
      */
-    public function __construct(array $settings, ResponseInterface $response = null)
+    public function __construct(array $settings, StreamFactoryInterface $streamFactory)
     {
         $this->settings = array_merge($this->settings, $settings);
         $this->plates = new Engine($this->settings['directory'], $this->settings['fileExtension']);
-        $this->response = $response;
+        $this->streamFactory = $streamFactory;
 
         if (null !== $this->settings['assetPath']) {
             $this->setAssetPath($this->settings['assetPath']);
@@ -48,9 +53,9 @@ class Plates
     /**
      * Get the Plate Engine.
      *
-     * @return \League\Plates\Engine
+     * @return Engine
      */
-    public function getPlates()
+    public function getPlates() : Engine
     {
         return $this->plates;
     }
@@ -60,9 +65,9 @@ class Plates
      *
      * @param string $assetPath
      *
-     * @return \League\Plates\Engine
+     * @return Engine
      */
-    public function setAssetPath($assetPath)
+    public function setAssetPath($assetPath) : Engine
     {
         return $this->plates->loadExtension(
             new Asset($assetPath, $this->settings['timestampInFilename'])
@@ -72,11 +77,11 @@ class Plates
     /**
      * Set Asset path from Plates Asset Extension.
      *
-     * @param \League\Plates\Extension\ExtensionInterface $extension
+     * @param ExtensionInterface $extension
      *
-     * @return \League\Plates\Engine
+     * @return Engine
      */
-    public function loadExtension(ExtensionInterface $extension)
+    public function loadExtension(ExtensionInterface $extension) : Engine
     {
         $extension->register($this->plates);
 
@@ -92,9 +97,9 @@ class Plates
      *
      * @throws \LogicException
      *
-     * @return \League\Plates\Engine
+     * @return Engine
      */
-    public function addFolder($name, $directory, $fallback = false)
+    public function addFolder($name, $directory, $fallback = false) : Engine
     {
         return $this->plates->addFolder($name, $directory, $fallback);
     }
@@ -107,9 +112,9 @@ class Plates
      *
      * @throws \LogicException
      *
-     * @return \League\Plates\Engine
+     * @return Engine
      */
-    public function addData(array $data, $templates = null)
+    public function addData(array $data, $templates = null) : Engine
     {
         return $this->plates->addData($data, $templates);
     }
@@ -122,45 +127,30 @@ class Plates
      *
      * @throws \LogicException
      *
-     * @return \League\Plates\Engine
+     * @return Engine
      */
-    public function registerFunction($name, $callback)
+    public function registerFunction($name, $callback) : Engine
     {
         return $this->plates->registerFunction($name, $callback);
     }
 
     /**
-     * Set response.
-     *
-     * @param \Psr\Http\Message\ResponseInterface $response
-     *
-     * @return self
-     */
-    public function setResponse(ResponseInterface $response)
-    {
-        $this->response = $response;
-
-        return $this;
-    }
-
-    /**
      * Render the template.
      *
-     * @param string   $name
-     * @param string[] $data
+     * @param ResponseInterface     $response
+     * @param string                $name
+     * @param array<string, mixed>  $data
      *
      * @throws \LogicException
      *
-     * @return \Psr\Http\Message\ResponseInterface
+     * @return ResponseInterface
      */
-    public function render($name, array $data = [])
+    public function render(ResponseInterface $response, $name, array $data = []) : ResponseInterface
     {
-        if (!isset($this->response)) {
-            throw new \LogicException(
-                sprintf('Invalid %s object instance', ResponseInterface::class)
-            );
-        }
+        $rendered = $this->streamFactory->createStream(
+            $this->plates->render($name, $data)
+        );
 
-        return $this->response->write($this->plates->render($name, $data));
+        return $response->withBody($rendered);
     }
 }

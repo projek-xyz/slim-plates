@@ -3,44 +3,51 @@ namespace Projek\Slim;
 
 use League\Plates\Engine;
 use League\Plates\Extension\ExtensionInterface;
+use Psr\Http\Message\ServerRequestInterface;
 use Psr\Http\Message\UriInterface;
-use Slim\Interfaces\RouterInterface;
+use Slim\Interfaces\RouteInterface;
+use Slim\Routing\RouteContext;
 
 class PlatesExtension implements ExtensionInterface
 {
     /**
-     * @var \Slim\Interfaces\RouterInterface
+     * @var RouteContext
      */
-    private $router;
+    private $context;
 
     /**
-     * @var \Psr\Http\Message\UriInterface
+     * @var UriInterface
      */
     private $uri;
 
     /**
      * Create new Asset instance.
      *
-     * @param \Slim\Interfaces\RouterInterface $router
-     * @param \Psr\Http\Message\UriInterface   $uri
+     * @param ServerRequestInterface $request
      */
-    public function __construct(RouterInterface $router, UriInterface $uri)
+    public function __construct(ServerRequestInterface $request)
     {
-        $this->router = $router;
-        $this->uri = $uri;
+        $this->context = RouteContext::fromRequest($request);
+        $this->uri = $request->getUri();
     }
 
     /**
      * Register extension function.
      *
-     * @param \League\Plates\Engine $engine Plates instance
+     * @param Engine $engine Plates instance
      */
-    public function register(Engine $engine)
+    public function register(Engine $engine) : void
     {
         $engine->registerFunction('baseUrl', [$this, 'baseUrl']);
         $engine->registerFunction('uriFull', [$this, 'uriFull']);
-        $engine->registerFunction('pathFor', [$this->router, 'pathFor']);
-        $engine->registerFunction('basePath', [$this->uri, 'getBasePath']);
+
+        $engine->registerFunction('route', [$this->context, 'getRoute']);
+        $engine->registerFunction('basePath', [$this->context, 'getBasePath']);
+
+        $engine->registerFunction('urlFor', [$this->context->getRouteParser(), 'urlFor']);
+        $engine->registerFunction('fullUrlFor', [$this->context->getRouteParser(), 'fullUrlFor']);
+        $engine->registerFunction('relativeUrlFor', [$this->context->getRouteParser(), 'relativeUrlFor']);
+
         $engine->registerFunction('uriScheme', [$this->uri, 'getScheme']);
         $engine->registerFunction('uriHost', [$this->uri, 'getHost']);
         $engine->registerFunction('uriPort', [$this->uri, 'getPort']);
@@ -56,9 +63,9 @@ class PlatesExtension implements ExtensionInterface
      *
      * @return string
      */
-    public function baseUrl($permalink = '')
+    public function baseUrl($permalink = '') : string
     {
-        return $this->uri->getBaseUrl().'/'.ltrim($permalink, '/');
+        return $this->context->getBasePath().'/'.ltrim($permalink, '/');
     }
 
     /**
@@ -66,8 +73,18 @@ class PlatesExtension implements ExtensionInterface
      *
      * @return string
      */
-    public function uriFull()
+    public function uriFull() : string
     {
         return (string) $this->uri;
+    }
+
+    /**
+     * Retrieve slim uri (string).
+     *
+     * @return RouteInterface|null
+     */
+    public function getRoute() : ?RouteInterface
+    {
+        return $this->context->getRoute();
     }
 }
