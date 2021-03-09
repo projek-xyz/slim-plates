@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "db5e40e5b767469b1af70eec62a3cb5f",
+    "content-hash": "8ec6d3e1cba515aa6936a48ecd841a2e",
     "packages": [
         {
             "name": "fig/http-message-util",
@@ -880,27 +880,27 @@
         },
         {
             "name": "projek-xyz/container",
-            "version": "v0.4.4",
+            "version": "v0.5.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/projek-xyz/container.git",
-                "reference": "165a7de7dd21e02b845f11761ae4beed16a970c5"
+                "reference": "bc3f161ceef7258873bbfa00441df69e82c4a5e6"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/projek-xyz/container/zipball/165a7de7dd21e02b845f11761ae4beed16a970c5",
-                "reference": "165a7de7dd21e02b845f11761ae4beed16a970c5",
+                "url": "https://api.github.com/repos/projek-xyz/container/zipball/bc3f161ceef7258873bbfa00441df69e82c4a5e6",
+                "reference": "bc3f161ceef7258873bbfa00441df69e82c4a5e6",
                 "shasum": ""
             },
             "require": {
-                "php": ">=7.1",
-                "psr/container": "^1.0"
+                "php": ">=7.2",
+                "psr/container": "^1.0 || ^2.0"
             },
             "provide": {
-                "psr/container-implementation": "^1.0"
+                "psr/container-implementation": "^2.0"
             },
             "require-dev": {
-                "kahlan/kahlan": "^4.7",
+                "kahlan/kahlan": "^4.7 || ^5.0",
                 "squizlabs/php_codesniffer": "^3.5"
             },
             "type": "library",
@@ -944,7 +944,7 @@
                     "type": "open_collective"
                 }
             ],
-            "time": "2020-11-08T06:33:22+00:00"
+            "time": "2021-03-07T14:23:56+00:00"
         },
         {
             "name": "squizlabs/php_codesniffer",
