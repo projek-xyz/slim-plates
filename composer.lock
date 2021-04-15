@@ -822,16 +822,16 @@
     "packages-dev": [
         {
             "name": "kahlan/kahlan",
-            "version": "5.0.8",
+            "version": "5.0.9",
             "source": {
                 "type": "git",
                 "url": "https://github.com/kahlan/kahlan.git",
-                "reference": "4638c4317ed19ac1c57be76daa2ab9f4a7f4338e"
+                "reference": "151ce67f3793f517bed503034b5a6cc9029293a3"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/kahlan/kahlan/zipball/4638c4317ed19ac1c57be76daa2ab9f4a7f4338e",
-                "reference": "4638c4317ed19ac1c57be76daa2ab9f4a7f4338e",
+                "url": "https://api.github.com/repos/kahlan/kahlan/zipball/151ce67f3793f517bed503034b5a6cc9029293a3",
+                "reference": "151ce67f3793f517bed503034b5a6cc9029293a3",
                 "shasum": ""
             },
             "require": {
@@ -874,9 +874,9 @@
             ],
             "support": {
                 "issues": "https://github.com/kahlan/kahlan/issues",
-                "source": "https://github.com/kahlan/kahlan/tree/5.0.8"
+                "source": "https://github.com/kahlan/kahlan/tree/5.0.9"
             },
-            "time": "2021-02-22T15:14:13+00:00"
+            "time": "2021-04-15T09:35:29+00:00"
         },
         {
             "name": "projek-xyz/container",
