@@ -37,7 +37,7 @@
     },
     "require-dev": {
         "kahlan/kahlan": "^4.7 || ^5.0",
-        "projek-xyz/container": "^0.4 || ^0.5",
+        "projek-xyz/container": "^0.4 || ^0.5 || ^0.6",
         "squizlabs/php_codesniffer": "^3.5"
     },
     "config": {
