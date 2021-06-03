@@ -1,12 +1,12 @@
-# Plates Template Integration for Slim micro framework 3
-
-[![LICENSE](https://img.shields.io/packagist/l/projek-xyz/slim-plates.svg?style=flat-square)](LICENSE.md)
 [![VERSION](https://img.shields.io/packagist/v/projek-xyz/slim-plates.svg?style=flat-square)](https://github.com/projek-xyz/slim-plates/releases)
-[![Build Status](https://img.shields.io/travis/projek-xyz/slim-plates/master.svg?branch=master&style=flat-square)](https://travis-ci.org/projek-xyz/slim-plates)
-[![Coveralls](https://img.shields.io/coveralls/projek-xyz/slim-plates/master.svg?style=flat-square)](https://coveralls.io/github/projek-xyz/slim-plates)
-[![Code Climate](https://img.shields.io/codeclimate/coverage/github/projek-xyz/slim-plates.svg?style=flat-square)](https://codeclimate.com/github/projek-xyz/slim-plates/coverage)
-[![Code Climate](https://img.shields.io/codeclimate/github/projek-xyz/slim-plates.svg?style=flat-square)](https://codeclimate.com/github/projek-xyz/slim-plates)
+[![LICENSE](https://img.shields.io/packagist/l/projek-xyz/slim-plates.svg?style=flat-square)](LICENSE.md)
+[![Actions Status](https://img.shields.io/github/workflow/status/projek-xyz/slim-plates/Tests/master?style=flat-square&logo=github-actions)](https://github.com/projek-xyz/slim-plates/actions)
+[![Coveralls](https://img.shields.io/coveralls/projek-xyz/slim-plates/master.svg?style=flat-square&logo=coveralls)](https://coveralls.io/github/projek-xyz/slim-plates)
+[![Code Climate](https://img.shields.io/codeclimate/coverage/projek-xyz/slim-plates.svg?style=flat-square&logo=code-climate)](https://codeclimate.com/github/projek-xyz/slim-plates/coverage)
+[![Maintainability](https://img.shields.io/codeclimate/maintainability/projek-xyz/slim-plates?style=flat-square&logo=code-climate)](https://codeclimate.com/github/projek-xyz/slim-plates/maintainability)
 [![SensioLabs Insight](https://img.shields.io/sensiolabs/i/0b18f66c-8041-47c3-8004-6eef2b940d30.svg?style=flat-square)](https://insight.sensiolabs.com/projects/0b18f66c-8041-47c3-8004-6eef2b940d30)
+
+# Plates Template Integration for Slim micro framework 3
 
 Render your Slim 3 application views using Plates template engine.
 
