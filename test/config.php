@@ -5,8 +5,6 @@
 
 use Kahlan\Filter\Filters;
 use Kahlan\Reporter\Coverage\Exporter;
-use Projek\Slim\Plates;
-use Slim\Psr7\Factory\StreamFactory;
 
 /** @var Kahlan\Cli\CommandLine $cli */
 $cli = $this->commandLine();
@@ -37,18 +35,8 @@ Filters::apply($this, 'run', function($next) {
     /** @var \Kahlan\Scope $scope */
     $scope = $group->scope(); // The top most describe scope.
 
-    $scope->given('stubPath', function () {
+    $scope->stubPath = function () {
         return __DIR__ . DIRECTORY_SEPARATOR . 'stub';
-    });
-
-    $scope->view = function (array $config = []) {
-        $config = array_merge([
-            'directory'     => $this->stubPath,
-            'assetPath'     => '',
-            'fileExtension' => 'tpl',
-        ], $config);
-
-        return new Plates($config, new StreamFactory);
     };
 
     return $next();

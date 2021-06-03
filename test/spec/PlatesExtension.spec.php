@@ -1,15 +1,21 @@
 <?php
 
+use Projek\Slim\Plates;
 use Projek\Slim\PlatesExtension;
 use Slim\CallableResolver;
-use Slim\Psr7\Factory\{ResponseFactory, ServerRequestFactory, UriFactory};
+use Slim\Psr7\Factory\{ResponseFactory, ServerRequestFactory, StreamFactory, UriFactory};
 use Slim\Routing\{Dispatcher, RouteCollector, RouteContext, RouteParser, RoutingResults};
 
 use function Kahlan\{beforeEach, describe, expect, it};
 
 describe(PlatesExtension::class, function () {
     beforeEach(function () {
-        $view = $this->view();
+        $view = new Plates([
+            'directory'     => $this->stubPath(),
+            'assetPath'     => '',
+            'fileExtension' => 'tpl',
+        ], new StreamFactory);
+
         $basePath = 'http://example.com';
         $routes = new RouteCollector(
             new ResponseFactory(),
@@ -29,6 +35,7 @@ describe(PlatesExtension::class, function () {
 
         $view->loadExtension(new PlatesExtension($request));
 
+        $this->view = $view;
         $this->getFunc = function (string $name, ...$params) use ($view) {
             /** @var \League\Plates\Engine $engine */
             $engine = $view->getPlates();
