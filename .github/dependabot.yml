@@ -6,13 +6,3 @@ updates:
     interval: daily
     time: "22:00"
   open-pull-requests-limit: 10
-  ignore:
-  - dependency-name: phpunit/phpunit
-    versions:
-    - ">= 8.a, < 9"
-  - dependency-name: phpunit/phpunit
-    versions:
-    - ">= 9.a, < 10"
-  - dependency-name: kahlan/kahlan
-    versions:
-    - 5.0.9
