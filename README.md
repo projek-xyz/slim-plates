@@ -4,7 +4,7 @@
 [![Coveralls](https://img.shields.io/coveralls/projek-xyz/slim-plates/master.svg?style=flat-square&logo=coveralls)](https://coveralls.io/github/projek-xyz/slim-plates)
 [![Code Climate](https://img.shields.io/codeclimate/coverage/projek-xyz/slim-plates.svg?style=flat-square&logo=code-climate)](https://codeclimate.com/github/projek-xyz/slim-plates/coverage)
 [![Maintainability](https://img.shields.io/codeclimate/maintainability/projek-xyz/slim-plates?style=flat-square&logo=code-climate)](https://codeclimate.com/github/projek-xyz/slim-plates/maintainability)
-[![SensioLabs Insight](https://img.shields.io/sensiolabs/i/0b18f66c-8041-47c3-8004-6eef2b940d30.svg?style=flat-square)](https://insight.sensiolabs.com/projects/0b18f66c-8041-47c3-8004-6eef2b940d30)
+[![SymfonyInsight Grade](https://img.shields.io/symfony/i/grade/daab7889-2745-4465-a1ef-6b7cecb2b0ac?style=flat-square&logo=symfony)](https://insight.symfony.com/projects/daab7889-2745-4465-a1ef-6b7cecb2b0ac)
 
 # Plates Template Integration for Slim micro framework 3
 
