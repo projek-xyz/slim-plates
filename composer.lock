@@ -620,16 +620,16 @@
         },
         {
             "name": "kahlan/kahlan",
-            "version": "5.1.3",
+            "version": "5.2.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/kahlan/kahlan.git",
-                "reference": "bbf99064b7b78049f58e20138bee18fcdee3573e"
+                "reference": "9edb4daeba5494bcd38a125c5d960447998902f4"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/kahlan/kahlan/zipball/bbf99064b7b78049f58e20138bee18fcdee3573e",
-                "reference": "bbf99064b7b78049f58e20138bee18fcdee3573e",
+                "url": "https://api.github.com/repos/kahlan/kahlan/zipball/9edb4daeba5494bcd38a125c5d960447998902f4",
+                "reference": "9edb4daeba5494bcd38a125c5d960447998902f4",
                 "shasum": ""
             },
             "require": {
@@ -643,12 +643,12 @@
             ],
             "type": "library",
             "autoload": {
-                "psr-4": {
-                    "Kahlan\\": "src/"
-                },
                 "files": [
                     "src/functions.php"
-                ]
+                ],
+                "psr-4": {
+                    "Kahlan\\": "src/"
+                }
             },
             "notification-url": "https://packagist.org/downloads/",
             "license": [
@@ -672,9 +672,9 @@
             ],
             "support": {
                 "issues": "https://github.com/kahlan/kahlan/issues",
-                "source": "https://github.com/kahlan/kahlan/tree/5.1.3"
+                "source": "https://github.com/kahlan/kahlan/tree/5.2.1"
             },
-            "time": "2021-06-13T11:14:50+00:00"
+            "time": "2022-06-18T14:06:54+00:00"
         },
         {
             "name": "projek-xyz/container",
@@ -1017,5 +1017,5 @@
     "prefer-lowest": false,
     "platform": [],
     "platform-dev": [],
-    "plugin-api-version": "2.2.0"
+    "plugin-api-version": "2.3.0"
 }
