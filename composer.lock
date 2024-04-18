@@ -619,22 +619,23 @@
         },
         {
             "name": "kahlan/kahlan",
-            "version": "5.2.1",
+            "version": "5.2.6",
             "source": {
                 "type": "git",
                 "url": "https://github.com/kahlan/kahlan.git",
-                "reference": "9edb4daeba5494bcd38a125c5d960447998902f4"
+                "reference": "e7d89f4a6ba0d71517a31e7e197b14d3bd85a0af"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/kahlan/kahlan/zipball/9edb4daeba5494bcd38a125c5d960447998902f4",
-                "reference": "9edb4daeba5494bcd38a125c5d960447998902f4",
+                "url": "https://api.github.com/repos/kahlan/kahlan/zipball/e7d89f4a6ba0d71517a31e7e197b14d3bd85a0af",
+                "reference": "e7d89f4a6ba0d71517a31e7e197b14d3bd85a0af",
                 "shasum": ""
             },
             "require": {
-                "php": ">=7.1"
+                "php": ">=7.2"
             },
             "require-dev": {
+                "rector/rector": "^0.18",
                 "squizlabs/php_codesniffer": "^3.4"
             },
             "bin": [
@@ -671,9 +672,9 @@
             ],
             "support": {
                 "issues": "https://github.com/kahlan/kahlan/issues",
-                "source": "https://github.com/kahlan/kahlan/tree/5.2.1"
+                "source": "https://github.com/kahlan/kahlan/tree/5.2.6"
             },
-            "time": "2022-06-18T14:06:54+00:00"
+            "time": "2023-12-05T21:56:31+00:00"
         },
         {
             "name": "projek-xyz/container",
