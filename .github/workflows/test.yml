@@ -1,16 +1,12 @@
 name: Tests
 
 on:
+  schedule: # scheduled to run at 23.00 on Saturday (UTC), means 6.00 on Monday (WIB)
+    - cron: '0 23 * * 6'
   pull_request:
-    branches:
-      - master
+    branches: [master]
   push:
-    branches:
-      - master
-    paths:
-      - .github/workflows/test.yml
-      - src/*
-      - test/*
+    branches: [master]
 
 env:
   COVERALLS_REPO_TOKEN: ${{ secrets.COVERALLS_REPO_TOKEN }}
@@ -18,92 +14,93 @@ env:
   CC_TEST_REPORTER_URL: https://codeclimate.com/downloads/test-reporter/test-reporter-0.7.0-linux-amd64
 
 jobs:
-  test:
-    name: Runs on PHP ${{ matrix.php-versions }}
-    runs-on: ubuntu-20.04
+  prepare:
+    name: Prepare
+    uses: projek-xyz/actions/.github/workflows/configure.yml@main
+    with:
+      php-version: 8.2
+    secrets:
+      CC_TEST_REPORTER_ID: ${{ secrets.CC_TEST_REPORTER_ID }}
+      COVERALLS_REPO_TOKEN: ${{ secrets.COVERALLS_REPO_TOKEN }}
+
+  tests:
+    name: Runs on PHP ${{ matrix.php }}
+    runs-on: ubuntu-latest
+    needs: prepare
     env:
       GIT_COMMIT_SHA: ${{ github.sha }}
-      GIT_BRANCH: ${{ github.ref }}
+      GIT_BRANCH: ${{ needs.prepare.outputs.target-branch }}
 
     strategy:
+      fail-fast: false
       matrix:
-        php-versions: ['7.2', '7.3', '7.4', '8.0', '8.1']
+        php: ['7.2', '7.3', '7.4', '8.0', '8.1', '8.2', '8.3']
 
     steps:
-    - name: Checkout
-      uses: actions/checkout@master
+      - name: Checkout
+        uses: actions/checkout@v4
 
-    - name: Set up PHP
-      uses: shivammathur/setup-php@master
-      with:
-        php-version: ${{ matrix.php-versions }}
-        coverage: xdebug
+      - name: Set up PHP
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: ${{ matrix.php }}
+          coverage: xdebug
 
-    - name: Get Composer cache directory
-      id: composer-cache
-      run: |
-        echo "GIT_BRANCH=$(echo ${GIT_BRANCH##*/} | tr / -)" >> $GITHUB_ENV
-        echo "::set-output name=dir::$(composer config cache-files-dir)"
+      - name: Cache Composer dependencies
+        uses: actions/cache@v4
+        with:
+          path: ${{ needs.prepare.outputs.composer-cache }}
+          key: php-${{ matrix.php }}-composer-${{ hashFiles('**/composer.lock') }}
+          restore-keys: php-${{ matrix.php }}-composer-
 
-    - name: Cache Composer dependencies
-      uses: actions/cache@v1
-      with:
-        path: ${{ steps.composer-cache.outputs.dir }}
-        key: ${{ runner.os }}-composer-${{ hashFiles('**/composer.lock') }}
-        restore-keys: ${{ runner.os }}-composer-
+      - name: Install dependencies
+        run: composer update --prefer-dist --no-progress --no-suggest
 
-    - name: Install dependencies
-      run: composer install --prefer-dist --no-progress --no-suggest
+      # https://help.github.com/en/actions/configuring-and-managing-workflows/using-environment-variables
+      # https://github.com/deivid-rodriguez/pry-byebug/blob/377e5b7d229a157bb896f21d776f71fc389a5c00/.github/workflows/ubuntu.yml#L46-L57
+      - name: Set ENV for CodeClimate (pull_request)
+        if: github.event_name == 'pull_request'
+        run: echo "GIT_BRANCH=$(echo ${GITHUB_HEAD_REF} | tr / -)" >> $GITHUB_ENV
 
-    # https://help.github.com/en/actions/configuring-and-managing-workflows/using-environment-variables
-    # https://github.com/deivid-rodriguez/pry-byebug/blob/377e5b7d229a157bb896f21d776f71fc389a5c00/.github/workflows/ubuntu.yml#L46-L57
-    - name: Set ENV for CodeClimate (pull_request)
-      if: github.event_name == 'pull_request'
-      run: echo "GIT_BRANCH=$(echo ${GITHUB_HEAD_REF} | tr / -)" >> $GITHUB_ENV
+      - name: Spec
+        run: composer spec
 
-    - name: Spec
-      run: composer spec
+      - name: Generate reports for Coveralls
+        if: needs.prepare.outputs.has-coveralls == '1'
+        uses: coverallsapp/github-action@v2
+        env:
+          COVERALLS_REPO_TOKEN: ${{ secrets.COVERALLS_REPO_TOKEN }}
+        with:
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          flag-name: php-${{ matrix.php }}
+          file: test/lcov.info
+          parallel: true
 
-    - name: CodeClimate
-      env:
-        LCOV_REPORT: ${{ github.workspace }}/test/lcov.info
-        CODECLIMATE_REPORT: ${{ github.workspace }}/test/codeclimate.${{ matrix.php-versions }}.json
-      run: |
-        curl -LSs $CC_TEST_REPORTER_URL > ./cc-test-reporter && chmod +x ./cc-test-reporter
-        ./cc-test-reporter format-coverage -t lcov -o $CODECLIMATE_REPORT $LCOV_REPORT
+      - name: Generate reports for CodeClimate
+        if: needs.prepare.outputs.has-codeclimate == '1'
+        id: reports
+        env:
+          CODECLIMATE_REPORT: tests/codeclimate.${{ matrix.php }}.json
+          CC_TEST_REPORTER_ID: ${{ secrets.CC_TEST_REPORTER_ID }}
+          CC_TEST_REPORTER_URL: ${{ vars.CC_TEST_REPORTER_URL }}
+        run: |
+          curl -LSs $CC_TEST_REPORTER_URL > ./cc-test-reporter && chmod +x ./cc-test-reporter
+          ./cc-test-reporter format-coverage -t lcov -o $CODECLIMATE_REPORT test/lcov.info
 
-    - name: Coveralls
-      uses: coverallsapp/github-action@master
-      with:
-        github-token: ${{ secrets.GITHUB_TOKEN }}
-        path-to-lcov: test/lcov.info
-        parallel: true
-
-    - name: Save Coverage Reports
-      uses: actions/upload-artifact@v2
-      with:
-        name: test-reports
-        path: ${{ github.workspace }}/test/*.json
+      - name: Save Coverage Reports
+        if: needs.prepare.outputs.has-codeclimate == '1'
+        uses: actions/upload-artifact@v4
+        with:
+          name: test-reports-${{ matrix.php }}
+          path: tests/codeclimate.*.json
 
   reports:
     name: Reports
-    needs: test
-    runs-on: ubuntu-20.04
-
-    steps:
-    - name: Download Reports
-      uses: actions/download-artifact@v2
-      with:
-        name: test-reports
-
-    - name: Coveralls Report
-      uses: coverallsapp/github-action@master
-      with:
-        github-token: ${{ secrets.github_token }}
-        path-to-lcov: test/lcov.info
-        parallel-finished: true
-
-    - name: CodeClimate Report
-      run: |
-        curl -LSs $CC_TEST_REPORTER_URL > ./cc-test-reporter && chmod +x ./cc-test-reporter
-        ./cc-test-reporter sum-coverage -o - codeclimate.*.json | ./cc-test-reporter upload-coverage --input -
+    needs: [prepare, tests]
+    if: needs.prepare.outputs.should-reports == '1'
+    uses: projek-xyz/actions/.github/workflows/report.yml@main
+    secrets:
+      CC_TEST_REPORTER_ID: ${{ secrets.CC_TEST_REPORTER_ID }}
+    with:
+      has-coveralls: ${{ needs.prepare.outputs.has-coveralls == '1' }}
+      has-codeclimate: ${{ needs.prepare.outputs.has-codeclimate == '1' }}

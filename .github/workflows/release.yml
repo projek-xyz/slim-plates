@@ -2,24 +2,9 @@ name: Release
 
 on:
   push:
-    tags:
-      - 'v*.*.*'
+    tags: ['v*.*.*']
 
 jobs:
   publish:
-    name: Publish Release
-    runs-on: ubuntu-20.04
-
-    steps:
-    - name: Checkout
-      uses: actions/checkout@v1
-
-    - name: Read Changelog file
-      run: npx @feryardiant/read-changelog > PUBLISH.txt
-
-    - name: Publish
-      uses: softprops/action-gh-release@v1
-      env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-      with:
-        body_path: PUBLISH.txt
+    name: Publish
+    uses: projek-xyz/actions/.github/workflows/release.yml@main

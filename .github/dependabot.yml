@@ -1,8 +1,32 @@
 version: 2
+
 updates:
-- package-ecosystem: composer
-  directory: "/"
-  schedule:
-    interval: daily
-    time: "22:00"
-  open-pull-requests-limit: 10
+  - package-ecosystem: github-actions
+    directory: "/"
+    schedule:
+      interval: monthly
+      timezone: "Asia/Jakarta"
+
+  - package-ecosystem: composer
+    directory: "/"
+    schedule:
+      interval: weekly
+      timezone: "Asia/Jakarta"
+    versioning-strategy: lockfile-only
+    groups:
+      dependencies:
+        dependency-type: "production"
+        patterns: ['*']
+      dev-dependencies:
+        dependency-type: "development"
+        patterns: ['*']
+
+  - package-ecosystem: npm
+    directory: "/"
+    schedule:
+      interval: monthly
+      timezone: "Asia/Jakarta"
+    versioning-strategy: increase-if-necessary
+    groups:
+      dependencies:
+        patterns: ['*']
