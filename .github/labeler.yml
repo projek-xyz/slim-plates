@@ -1,0 +1,34 @@
+api:
+  - changed-files:
+      - any-glob-to-any-file: ["src/**.php"]
+
+dependencies:
+  - changed-files:
+      - any-glob-to-any-file:
+          - "composer.json"
+          - "package.json"
+          - "pnpm-lock.yaml"
+
+documentation:
+  - changed-files:
+      - any-glob-to-any-file: ["**.md"]
+
+enhancement:
+  - changed-files:
+      - any-glob-to-any-file: "**"
+
+experimental:
+  - head-branch: ["^test", "test"]
+
+features:
+  - head-branch: ["^feat", "feat"]
+
+fixes:
+  - head-branch: ["^fix", "fix"]
+
+integration:
+  - changed-files:
+      - any-glob-to-any-file:
+          - ".github/**.yml"
+          - "scripts/**"
+          - "tests/**.php"
