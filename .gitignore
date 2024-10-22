@@ -3,19 +3,22 @@
 Thumbs.db
 Desktop.ini
 .directory
+.DS_Store
+._*
 *.cache
-*.old
+*.crt
 *.log
+*.old
+*.key
+*.pem
 *.tmp
 *.zip
-._
 *~
 
 # Development files
 # --------------------------
 .php-version
-tests/clover.xml
-coveralls-upload.json
+.tool-versions
 
 # Dependency folders
 # --------------------------
