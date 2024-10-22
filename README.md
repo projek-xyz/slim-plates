@@ -1,10 +1,10 @@
-[![VERSION](https://img.shields.io/packagist/v/projek-xyz/slim-plates.svg?style=flat-square)](https://github.com/projek-xyz/slim-plates/releases)
-[![LICENSE](https://img.shields.io/packagist/l/projek-xyz/slim-plates.svg?style=flat-square)](LICENSE.md)
-[![Actions Status](https://img.shields.io/github/workflow/status/projek-xyz/slim-plates/Tests/master?style=flat-square&logo=github-actions)](https://github.com/projek-xyz/slim-plates/actions)
+[![Version](https://img.shields.io/packagist/v/projek-xyz/slim-plates?style=flat-square)](https://packagist.org/packages/projek-xyz/slim-plates)
+[![Lisence](https://img.shields.io/github/license/projek-xyz/slim-plates?style=flat-square)](https://github.com/projek-xyz/slim-plates/blob/main/LICENSE)
+[![Actions Status](https://img.shields.io/github/actions/workflow/status/projek-xyz/slim-plates/test.yml?branch=main&style=flat-square)](https://github.com/projek-xyz/slim-plates/actions)
 [![Coveralls](https://img.shields.io/coveralls/projek-xyz/slim-plates/master.svg?style=flat-square&logo=coveralls)](https://coveralls.io/github/projek-xyz/slim-plates)
 [![Code Climate](https://img.shields.io/codeclimate/coverage/projek-xyz/slim-plates.svg?style=flat-square&logo=code-climate)](https://codeclimate.com/github/projek-xyz/slim-plates/coverage)
 [![Maintainability](https://img.shields.io/codeclimate/maintainability/projek-xyz/slim-plates?style=flat-square&logo=code-climate)](https://codeclimate.com/github/projek-xyz/slim-plates/maintainability)
-[![SymfonyInsight Grade](https://img.shields.io/symfony/i/grade/daab7889-2745-4465-a1ef-6b7cecb2b0ac?style=flat-square&logo=symfony)](https://insight.symfony.com/projects/daab7889-2745-4465-a1ef-6b7cecb2b0ac)
+[![SymfonyInsight Grade](https://img.shields.io/symfony/i/grade/69e58aaf-5d08-45f8-a9a7-8f246e031ec0?style=flat-square&logo=symfony)](https://insight.symfony.com/projects/69e58aaf-5d08-45f8-a9a7-8f246e031ec0)
 
 # Plates Template Integration for Slim micro framework 3
 
