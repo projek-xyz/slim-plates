@@ -6,13 +6,14 @@
 use Kahlan\Filter\Filters;
 use Kahlan\Reporter\Coverage\Exporter;
 
-/** @var Kahlan\Cli\CommandLine $cli */
+/** @var Kahlan\Cli\Kahlan $this */
 $cli = $this->commandLine();
 $cli->option('coverage', 'default', 3);
 $cli->option('spec', 'default', ['test/spec']);
 $cli->option('lcov', 'default', 'test/lcov.info');
 
 Filters::apply($this, 'reporting', function ($next) {
+    /** @var Kahlan\Cli\Kahlan $this */
     if (! $reporter = $this->reporters()->get('coverage')) {
         return;
     }
@@ -30,10 +31,8 @@ Filters::apply($this, 'reporting', function ($next) {
 });
 
 Filters::apply($this, 'run', function($next) {
-    /** @var \Kahlan\Block\Group $group */
-    $group = $this->suite()->root();
     /** @var \Kahlan\Scope $scope */
-    $scope = $group->scope(); // The top most describe scope.
+    $scope = $this->suite()->root()->scope(); // The top most describe scope.
 
     $scope->stubPath = function () {
         return __DIR__ . DIRECTORY_SEPARATOR . 'stub';
