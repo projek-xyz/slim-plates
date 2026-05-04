@@ -8,11 +8,6 @@ on:
   push:
     branches: [main]
 
-env:
-  COVERALLS_REPO_TOKEN: ${{ secrets.COVERALLS_REPO_TOKEN }}
-  CC_TEST_REPORTER_ID: ${{ secrets.CC_TEST_REPORTER_ID }}
-  CC_TEST_REPORTER_URL: https://codeclimate.com/downloads/test-reporter/test-reporter-0.7.0-linux-amd64
-
 jobs:
   prepare:
     name: Prepare
@@ -20,7 +15,6 @@ jobs:
     with:
       php-version: 8.2
     secrets:
-      CC_TEST_REPORTER_ID: ${{ secrets.CC_TEST_REPORTER_ID }}
       COVERALLS_REPO_TOKEN: ${{ secrets.COVERALLS_REPO_TOKEN }}
 
   tests:
@@ -49,18 +43,12 @@ jobs:
       - name: Cache Composer dependencies
         uses: actions/cache@v4
         with:
-          path: ${{ needs.prepare.outputs.composer-cache }}
-          key: php-${{ matrix.php }}-composer-${{ hashFiles('**/composer.lock') }}
-          restore-keys: php-${{ matrix.php }}-composer-
+          path: ${{ needs.prepare.outputs.composer-cache-dir }}
+          key: ${{ needs.prepare.outputs.composer-cache-key }}-${{ hashFiles('**/composer.lock') }}
+          restore-keys: ${{ needs.prepare.outputs.composer-cache-key }}-
 
       - name: Install dependencies
         run: composer update --prefer-dist --no-progress --no-suggest
-
-      # https://help.github.com/en/actions/configuring-and-managing-workflows/using-environment-variables
-      # https://github.com/deivid-rodriguez/pry-byebug/blob/377e5b7d229a157bb896f21d776f71fc389a5c00/.github/workflows/ubuntu.yml#L46-L57
-      - name: Set ENV for CodeClimate (pull_request)
-        if: github.event_name == 'pull_request'
-        run: echo "GIT_BRANCH=$(echo ${GITHUB_HEAD_REF} | tr / -)" >> $GITHUB_ENV
 
       - name: Spec
         run: composer spec
@@ -76,31 +64,10 @@ jobs:
           file: test/lcov.info
           parallel: true
 
-      - name: Generate reports for CodeClimate
-        if: needs.prepare.outputs.has-codeclimate == '1'
-        id: reports
-        env:
-          CODECLIMATE_REPORT: tests/codeclimate.${{ matrix.php }}.json
-          CC_TEST_REPORTER_ID: ${{ secrets.CC_TEST_REPORTER_ID }}
-          CC_TEST_REPORTER_URL: ${{ vars.CC_TEST_REPORTER_URL }}
-        run: |
-          curl -LSs $CC_TEST_REPORTER_URL > ./cc-test-reporter && chmod +x ./cc-test-reporter
-          ./cc-test-reporter format-coverage -t lcov -o $CODECLIMATE_REPORT test/lcov.info
-
-      - name: Save Coverage Reports
-        if: needs.prepare.outputs.has-codeclimate == '1'
-        uses: actions/upload-artifact@v5
-        with:
-          name: test-reports-${{ matrix.php }}
-          path: tests/codeclimate.*.json
-
   reports:
     name: Reports
     needs: [prepare, tests]
     if: needs.prepare.outputs.should-reports == '1'
     uses: projek-xyz/actions/.github/workflows/report.yml@main
-    secrets:
-      CC_TEST_REPORTER_ID: ${{ secrets.CC_TEST_REPORTER_ID }}
     with:
       has-coveralls: ${{ needs.prepare.outputs.has-coveralls == '1' }}
-      has-codeclimate: ${{ needs.prepare.outputs.has-codeclimate == '1' }}
